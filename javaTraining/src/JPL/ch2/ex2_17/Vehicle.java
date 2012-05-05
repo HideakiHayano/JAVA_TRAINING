@@ -37,12 +37,12 @@ public class Vehicle {
 	
 	public void turn(double angle, String direction){
 		//éûåvÇ‹ÇÌÇËÇê≥Ç∆Ç∑ÇÈ
-		if(direction.equals(TURN_LEFT)){
+		if(direction.equals(Vehicle.TURN_LEFT)){
 			
 			this.angle += angle;
 			
 		}
-		else if(direction.equals(TURN_RIGHT)){
+		else if(direction.equals(Vehicle.TURN_RIGHT)){
 			
 			this.angle -= angle;
 			
