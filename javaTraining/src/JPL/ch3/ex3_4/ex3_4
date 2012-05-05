@@ -1,0 +1,2 @@
+getOwnerName(), getID()などはサブクラスで実装を変える必要がなさそうなのでfinaｌをつける。
+set(), changeSpeed()などはサブクラスごとに再定義するのがよいのでfinalはつけない。
