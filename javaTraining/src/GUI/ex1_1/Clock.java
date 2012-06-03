@@ -1,11 +1,11 @@
-package GUI;
+package GUI.ex1_1;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Watch extends Frame{
+public class Clock extends Frame{
 	
 	Panel panel;
 	Label label;
@@ -13,7 +13,7 @@ public class Watch extends Frame{
 	Calendar date = Calendar.getInstance();
 	SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 	
-	Watch(){
+	Clock(){
 		super("ŽžŒv");
 		int width = 400;
 		int height = 100;
@@ -38,7 +38,7 @@ public class Watch extends Frame{
 	}
 	
 	public static void main(String[] args){
-		Watch watch = new Watch();
+		Clock clock = new Clock();
 	}
 	
 	   class ClosingWindowListener extends WindowAdapter{      
