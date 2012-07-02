@@ -135,7 +135,7 @@ public class Clock extends Frame{
 			
 			MenuItem mifs1 = new MenuItem("25");
 			MenuItem mifs2 = new MenuItem("50");
-			MenuItem mifs3 = new MenuItem("100");
+			MenuItem mifs3 = new MenuItem("75");
 			mnfs.add(mifs1);
 			mnfs.add(mifs2);
 			mnfs.add(mifs3);
@@ -198,8 +198,8 @@ public class Clock extends Frame{
 		        	canvas.setFontSize(50);
 		        }
 		        
-		        if (e.getActionCommand() == "100"){
-		        	canvas.setDrawPoint(100, 100);
+		        if (e.getActionCommand() == "75"){
+		        	canvas.setDrawPoint(75, 75);
 		        	setSize(1200, 200);
 		        	canvas.setFontSize(100);
 		        }
