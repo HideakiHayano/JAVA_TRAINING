@@ -64,8 +64,9 @@ public class MyFrame extends Frame{
 		int x;
 		int y;
 		
-		public MouseAdapter(MyMenuBar panel){
+		public MouseAdapter(MyMenuBar panel, MyFrame frame){
 			this.panel = panel;
+			this.frame = frame;
 		}
 		
 		public MouseAdapter(MyFrame frame){
@@ -83,12 +84,13 @@ public class MyFrame extends Frame{
 		}
 		
 	    public void mouseReleased(MouseEvent e){
-	    	MyFrame newFrame = new MyFrame();
-	    	newFrame.setLocation(e.getX(), e.getY());
+//	    	MyFrame newFrame = new MyFrame();
+//	    	newFrame.setLocation(e.getX(), e.getY());
+	    	frame.setLocation(e.getX(), e.getY());
 	    	try {
-	    		this.frame.remove(panel);
+	    		//this.frame.remove(panel);
 //				panel.setVisible(false);
-				this.frame.setVisible(false);
+				//this.frame.setVisible(false);
 			} catch (Throwable e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -207,7 +209,7 @@ public class MyFrame extends Frame{
 			mn.add(mn1);
 			popup.add(mn);
 			
-			addMouseListener((MouseListener) new MouseAdapter(this));
+			addMouseListener((MouseListener) new MouseAdapter(this, frame));
 			addMouseMotionListener((MouseMotionListener) new MouseAdapter(this.frame));
 			
 			add(popup);
