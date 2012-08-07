@@ -7,9 +7,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Vector;
-
-import GUI.ex1_3.MyFrame;
+import java.util.prefs.Preferences;
 
 public class Clock extends Frame {
 	int width = 400;
@@ -18,16 +16,68 @@ public class Clock extends Frame {
 	Timer timer = new Timer();
 	TimerTask timerTask = new Task();
 	MyMenuBar myMenu = new MyMenuBar(this);
+	MyDialog myDialog;
+	Property property = new Property(this);
+	
+	int bgRed;
+	int bgGreen;
+	int bgBlue;
+	
+	Preferences prefs;
+	static final String BGRED= "bgred";
+	static final String BGGREEN= "bggreen";
+	static final String BGBLUE= "bgblue";
+    static final String LOCATION_X = "locationX";
+    static final String LOCATION_Y = "locationY";
+    static final String WIDTH = "width";
+    static final String HEIGHT = "height";
+
+    int locationX;
+    int locationY;
+    
+    
+	public void save(){
+		Rectangle rect = this.getBounds();
+		prefs.putInt(LOCATION_X, rect.x);
+		prefs.putInt(LOCATION_Y, rect.y);
+		prefs.putInt(WIDTH, rect.width);
+		prefs.putInt(HEIGHT, rect.height);
+		
+		Color color = this.myMenu.getBackground();
+		bgRed = color.getRed();
+		bgGreen = color.getGreen();
+		bgBlue = color.getBlue();
+		prefs.putInt(BGRED, bgRed);
+		prefs.putInt(BGGREEN, bgGreen);
+		prefs.putInt(BGBLUE, bgBlue);
+	}
+	
+	public void load(){
+        locationX = prefs.getInt(LOCATION_X, 0);
+        locationY = prefs.getInt(LOCATION_Y, 0);
+        width = prefs.getInt(WIDTH, 400);
+        height = prefs.getInt(HEIGHT, 100);
+
+		bgRed = prefs.getInt(BGRED, 255);
+		bgGreen= prefs.getInt(BGGREEN, 255);
+		bgBlue = prefs.getInt(BGBLUE, 255);
+	}
+	
 	Clock() {
 		super("時計");
 		super.setSize(width, height);
-
+		
+		prefs = Preferences.userNodeForPackage(this.getClass());
+		load();
+		this.setBounds(locationX, locationY, width, height);
+		this.myMenu.setBackground(new Color(bgRed, bgGreen, bgBlue));
+		
 		// 定期的にTimerTask.run()を実行
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 		
-		
+		setMenuBar(property);
 		add(myMenu);
-
+		
 		addWindowListener(new ClosingWindowListener());
 		super.setVisible(true);
 
@@ -44,6 +94,30 @@ public class Clock extends Frame {
 	public void setSize(int w, int h) {
 		super.setSize(w, h);
 	}
+	
+	class Property extends MenuBar implements ActionListener{
+		Menu mn;
+		MenuItem mi;
+		Clock clock;
+		Property(Clock clock){
+			this.clock = clock;
+			mn = new Menu("プロパティ");
+			mi = new MenuItem("ダイアログ");
+			mn.addActionListener(this);
+			mi.addActionListener(this);
+			mn.add(mi);
+			add(mn);
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(mn)){
+				clock.myDialog = new MyDialog(clock);
+			}
+	        if (e.getActionCommand() == "ダイアログ"){
+	        	clock.myDialog = new MyDialog(clock);
+	        }
+		}
+	}
 
 	class MyTime {
 		String time;
@@ -58,21 +132,27 @@ public class Clock extends Frame {
 	}
 
 	class MyDialog extends Dialog implements ItemListener, ActionListener{
-		Frame frame;
+		Clock clock;
 		MyMenuBar myMenu;
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		List lst1;
 		List fontList;
 		List fontSizeList;
+		List fontColorList;
+		List backGroundColorList;
 		String[] fs;
+		Font  preFont;
+		Font  font;
+		Color preColor;
 		Button okButton;
 		Button cancelButton;
 		
-		public MyDialog(Frame owner, MyMenuBar myMenu) {
+		public MyDialog(Clock owner) {
 			super(owner);
-			this.frame = owner;
-			this.myMenu = myMenu;
+			this.clock = owner;
+			preFont = clock.myMenu.font;
+			preColor = clock.getBackground();
 			
 			fontList = new List(4, false);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -85,6 +165,22 @@ public class Clock extends Frame {
 			fontSizeList.add("10");
 			fontSizeList.add("20");
 			fontSizeList.add("30");
+			
+			backGroundColorList = new List(4, false);
+			backGroundColorList.add("赤");
+			backGroundColorList.add("青");
+			backGroundColorList.add("黄");
+			backGroundColorList.add("緑");
+			backGroundColorList.add("白");
+			backGroundColorList.add("黒");
+			
+			fontColorList = new List(4, false);
+			fontColorList.add("赤");
+			fontColorList.add("青");
+			fontColorList.add("黄");
+			fontColorList.add("緑");
+			fontColorList.add("白");
+			fontColorList.add("黒");
 			
 			lst1 = new List(4, false);
 			lst1.add("フォント");
@@ -100,13 +196,15 @@ public class Clock extends Frame {
 			add(3, 4, 1, 1, cancelButton, gbl, gbc);
 
 			lst1.addItemListener(this);
-     		fontList.addItemListener(this);
-			
      		lst1.addActionListener(this);
+     		fontList.addItemListener(this);
      		fontList.addActionListener(this);
+     		backGroundColorList.addItemListener(this);
+     		backGroundColorList.addActionListener(this);
      		
 			okButton.addActionListener(this);
 			cancelButton.addActionListener(this);
+			
 			addWindowListener(new ClosingWindowListener());
 			
 			setLayout(gbl);
@@ -133,17 +231,27 @@ public class Clock extends Frame {
 
 		public void actionPerformed(ActionEvent e) {		
 			if(e.getSource().equals(okButton)){
-				if(lst1.getSelectedItem().equals("フォント")){
-
-				}
+//				if(lst1.getSelectedItem().equals("フォント")){
+//				}
+//				else if(lst1.getSelectedItem().equals("フォントサイズ")){
+//				}
+//				clock.myMenu.setBackground(Color.BLACK);
+				this.setVisible(false);
 			}
 			if(e.getSource().equals(cancelButton)){
-				
+				clock.myMenu.setBackground(preColor);
+			}
+			if(e.getSource().equals(backGroundColorList)){
+
 			}
 		}
 
 		public void itemStateChanged(ItemEvent e) {
 			if(e.getSource().equals(lst1)){
+				this.remove(fontList);
+				this.remove(fontSizeList);
+				this.remove(fontColorList);
+				this.remove(backGroundColorList);
 				if(lst1.getSelectedItem().equals("フォント")){
 					add(1, 0, 1, 1, fontList, gbl, gbc);
 				}
@@ -151,13 +259,20 @@ public class Clock extends Frame {
 					System.out.println("c");
 					add(1, 0, 1, 1, fontSizeList, gbl, gbc);
 				}
+				else if(lst1.getSelectedItem().equals("文字色")){
+					add(1, 0, 1, 1, fontColorList, gbl, gbc);
+				}
+				else if(lst1.getSelectedItem().equals("背景色")){
+					add(1, 0, 1, 1, backGroundColorList, gbl, gbc);
+				}
 			}
 			if(e.getSource().equals(fontList)){
 				for(int i = 0; i < fs.length; i++){
 					if(fontList.getSelectedItem().equals(fs[i])){
 						System.out.println("d");
+						
 						Font f = new Font(fs[i], Font.PLAIN, 10);
-						this.myMenu.setFont(f);
+						clock.myMenu.setFont(f);
 					}
 				}
 			}
@@ -165,15 +280,54 @@ public class Clock extends Frame {
 					System.out.println("d");
 					int fontSize = Integer.parseInt(fontSizeList.getSelectedItem());
 					Font f = new Font(fs[22], Font.PLAIN, fontSize);
-					this.myMenu.setFont(f);
+					clock.myMenu.setFont(f);
+			}
+			else if(e.getSource().equals(fontColorList)){
+				if(fontColorList.getSelectedItem().equals("赤")){
+					clock.myMenu.setFontColor(Color.RED);
+				}
+				else if(fontColorList.getSelectedItem().equals("青")){
+					clock.myMenu.setBackground(Color.BLUE);
+				}
+				else if(fontColorList.getSelectedItem().equals("黄")){
+					clock.myMenu.setBackground(Color.YELLOW);
+				}
+				else if(fontColorList.getSelectedItem().equals("緑")){
+					clock.myMenu.setBackground(Color.GREEN);
+				}
+				else if(fontColorList.getSelectedItem().equals("白")){
+					clock.myMenu.setBackground(Color.WHITE);
+				}
+				else if(fontColorList.getSelectedItem().equals("黒")){
+					clock.myMenu.setBackground(Color.BLACK);
+				}
+			}
+			else if(e.getSource().equals(backGroundColorList)){
+				if(backGroundColorList.getSelectedItem().equals("赤")){
+					clock.myMenu.setBackground(Color.RED);
+				}
+				else if(backGroundColorList.getSelectedItem().equals("青")){
+					clock.myMenu.setBackground(Color.BLUE);
+				}
+				else if(backGroundColorList.getSelectedItem().equals("黄")){
+					clock.myMenu.setBackground(Color.YELLOW);
+				}
+				else if(backGroundColorList.getSelectedItem().equals("緑")){
+					clock.myMenu.setBackground(Color.GREEN);
+				}
+				else if(backGroundColorList.getSelectedItem().equals("白")){
+					clock.myMenu.setBackground(Color.WHITE);
+				}
+				else if(backGroundColorList.getSelectedItem().equals("黒")){
+					clock.myMenu.setBackground(Color.BLACK);
+				}
 			}
 			setLayout(gbl);
 			setVisible(true);
 		}
 	}
-
+	
 	class MyMenuBar extends Panel {
-		private PopupMenu popup;
 
 		Font font;
 		int fontKind = Font.PLAIN;
@@ -192,73 +346,6 @@ public class Clock extends Frame {
 			MyTime myTime = new MyTime();
 			font = new Font(myTime.time, fontKind, fontSize);
 			fontColor = Color.BLACK;
-
-			popup = new PopupMenu();
-
-//			MyDialog dialog = new MyDialog(this.frame, this);
-			
-			Menu mn = new Menu("メニュー");
-			Menu mn1 = new Menu("プロパティ");
-			Menu mnf = new Menu("フォント");
-			Menu mnbg = new Menu("背景");
-
-			// mn1.add(mnf);
-			// mn1.add(mnbg);
-			//
-			// Menu mnfk = new Menu("フォントの種類");
-			// Menu mnfs = new Menu("フォントサイズ");
-			// Menu mnfc = new Menu("文字色");
-			//
-			// mnf.add(mnfk);
-			// mnf.add(mnfs);
-			// mnf.add(mnfc);
-			//
-			// MenuItem mifk1 = new MenuItem("標準");
-			// MenuItem mifk2 = new MenuItem("太字");
-			// MenuItem mifk3 = new MenuItem("イタリック");
-			// mnfk.add(mifk1);
-			// mnfk.add(mifk2);
-			// mnfk.add(mifk3);
-			//
-			// MenuItem mifs1 = new MenuItem("25");
-			// MenuItem mifs2 = new MenuItem("50");
-			// MenuItem mifs3 = new MenuItem("75");
-			// mnfs.add(mifs1);
-			// mnfs.add(mifs2);
-			// mnfs.add(mifs3);
-			//
-			// MenuItem mifc1 = new MenuItem("黒");
-			// MenuItem mifc2 = new MenuItem("白");
-			// mnfc.add(mifc1);
-			// mnfc.add(mifc2);
-			//
-			// MenuItem mibg1 = new MenuItem("赤");
-			// MenuItem mibg2 = new MenuItem("緑");
-			// MenuItem mibg3 = new MenuItem("黄");
-			// mnbg.add(mibg1);
-			// mnbg.add(mibg2);
-			// mnbg.add(mibg3);
-			//
-			// mn.add(mn1);
-//			popup.add(mn);
-
-			add(popup);
-			MyDialog dialog = new MyDialog(this.frame, this);
-			// mifk1.addActionListener(new ActionAdapter());
-			// mifk2.addActionListener(new ActionAdapter());
-			// mifk3.addActionListener(new ActionAdapter());
-			//
-			// mifs1.addActionListener(new ActionAdapter());
-			// mifs2.addActionListener(new ActionAdapter());
-			// mifs3.addActionListener(new ActionAdapter());
-			//
-			// mifc1.addActionListener(new ActionAdapter());
-			// mifc2.addActionListener(new ActionAdapter());
-			//
-			// mibg1.addActionListener(new ActionAdapter());
-			// mibg2.addActionListener(new ActionAdapter());
-			// mibg3.addActionListener(new ActionAdapter());
-
 		}
 
 		public void setFontKind(int fontKind) {
@@ -361,6 +448,7 @@ public class Clock extends Frame {
 
 	class ClosingWindowListener extends WindowAdapter {
 		public void windowClosing(WindowEvent e) {
+			save();
 			System.exit(0);
 		}
 	}
