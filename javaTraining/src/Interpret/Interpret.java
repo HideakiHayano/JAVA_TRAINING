@@ -1,5 +1,6 @@
 package Interpret;
 
+
 import java.awt.Color;
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -21,27 +22,6 @@ public class Interpret{
 		this.display1 = display1;
 		this.display2 = display2;
 	}
-	
-//	class Display extends JFrame{
-//		
-//		JTextArea text;
-//		JScrollPane scroll;
-//		
-//		Display(){
-//			text = new JTextArea();
-//			text.setWrapStyleWord(true);
-//			scroll = new JScrollPane(text);
-//			add(scroll);
-////			addWindowListener(new ClosingWindowListener());
-//			setSize(600, 500);
-//			setVisible(true);
-//		}
-//		
-//		void append(String str){
-//			text.append(str);
-//		}
-//		
-//	}
 	
 	static String message = new String();
 	/**
