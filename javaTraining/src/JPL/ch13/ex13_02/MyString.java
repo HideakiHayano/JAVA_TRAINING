@@ -1,10 +1,10 @@
-package JPL.ch13.ex13_2;
+package JPL.ch13.ex13_02;
 
 public class MyString {
 		
 	public int countIncludedString(CharSequence charseq, String str){
 		if(charseq == null || str == null){
-			System.out.println("—LŒø‚È’l‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+			System.out.println("ï¿½Lï¿½ï¿½È’lï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		String testedStr = charseq.toString();

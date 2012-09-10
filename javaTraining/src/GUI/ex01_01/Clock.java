@@ -1,4 +1,4 @@
-package GUI.ex1_1;
+package GUI.ex01_01;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ public class Clock extends Frame{
 	SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 	
 	Clock(){
-		super("Œv");
+		super("ï¿½ï¿½ï¿½v");
 		int width = 400;
 		int height = 100;
 		super.setSize(width, height);
@@ -30,7 +30,7 @@ public class Clock extends Frame{
 		
 		Timer timer = new Timer();
 		TimerTask timerTask = new Task();
-		//’èŠú“I‚ÉTimerTask.run()‚ğÀs
+		//ï¿½ï¿½ï¿½Iï¿½ï¿½TimerTask.run()ï¿½ï¿½ï¿½ï¿½ï¿½s
 	    timer.scheduleAtFixedRate(timerTask, 0, 1000);
 		
 		addWindowListener(new ClosingWindowListener());

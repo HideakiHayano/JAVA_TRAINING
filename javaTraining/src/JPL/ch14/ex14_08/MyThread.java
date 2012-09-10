@@ -1,4 +1,4 @@
-package JPL.ch14.ex14_8;
+package JPL.ch14.ex14_08;
 
 public class MyThread extends Thread{
 	

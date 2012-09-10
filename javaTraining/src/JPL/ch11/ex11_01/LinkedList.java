@@ -1,4 +1,4 @@
-package JPL.ch11.ex11_1;
+package JPL.ch11.ex11_01;
 
 public class LinkedList<E>{
 	
@@ -38,8 +38,6 @@ public class LinkedList<E>{
 		list.add(new Vehicle("Roger"));
 		list.add(new Vehicle("Rafael"));
 		list.add(new Vehicle("Novak"));
-		
-		System.out.println(list.node.getNext());
 
 	}
 	

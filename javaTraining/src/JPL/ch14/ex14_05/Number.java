@@ -1,4 +1,4 @@
-package JPL.ch14.ex14_5;
+package JPL.ch14.ex14_05;
 
 public class Number extends Thread{
 
@@ -7,13 +7,13 @@ public class Number extends Thread{
 	
 	synchronized void add(int value){
 		this.value += value;
-		System.out.println(value + "加算。 " + "現在の値：" + this.value);
+		System.out.println("added value: " + value + " result value: " + this.value);
 	}
 	
 	void addIDNum(int value){
 		synchronized(Number.class){
 			this.IDNum -= value; 
-			System.out.println(value + "減算。 " + "現在のID：" + this.IDNum);
+			System.out.println("added value: " + value + " result value: " + IDNum);
 		}
 	}
 

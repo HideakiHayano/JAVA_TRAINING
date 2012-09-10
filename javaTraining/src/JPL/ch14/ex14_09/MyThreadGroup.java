@@ -1,11 +1,11 @@
-package JPL.ch14.ex14_9;
+package JPL.ch14.ex14_09;
 
 public class MyThreadGroup extends Thread{
 	
 	public void enumerateThreads(ThreadGroup threads){
-		//ƒXƒŒƒbƒhƒOƒ‹[ƒv“à‚ÌƒXƒŒƒbƒh”•ª‚¾‚¯”z—ñ‚Ì—v‘f‚ğŠm•Û
+		//ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Oï¿½ï¿½ï¿½[ï¿½vï¿½ï¿½ï¿½ÌƒXï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½Ì—vï¿½fï¿½ï¿½ï¿½mï¿½ï¿½
 		Thread[] list = new Thread[threads.activeCount()];
-		//list‚Éthreads“à‚ÌƒXƒŒƒbƒh‚ğŠi”[BŠK‘w“à‚ÌƒXƒŒƒbƒh‚ğ‘S‚ÄŠÜ‚Ş‚½‚ßArecurse = true;
+		//listï¿½ï¿½threadsï¿½ï¿½ï¿½ÌƒXï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½iï¿½[ï¿½Bï¿½Kï¿½wï¿½ï¿½ï¿½ÌƒXï¿½ï¿½ï¿½bï¿½hï¿½ï¿½Sï¿½ÄŠÜ‚Ş‚ï¿½ï¿½ßArecurse = true;
 		threads.enumerate(list, true);
 		if(threads.activeCount() != 0){
 			for(int i = 0; i < list.length; i++){

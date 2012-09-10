@@ -1,6 +1,6 @@
-package JPL.ch16.ex16_5;
+package JPL.ch16.ex16_05;
 
-import JPL.ch16.ex16_4.BugsFixed;
+import JPL.ch16.ex16_04.BugsFixed;
 
 @BugsFixed(bugIDs = { "aa" }, fixedBy = { "Roger" }, value = { "b" })
 public enum ColorOfTrafficLight {
@@ -68,11 +68,11 @@ public enum ColorOfTrafficLight {
 			maxValue = maxValue - 1 ;
 			
 			if(Red < 0 || Green < 0 || Blue < 0){
-				System.out.println("ƒGƒ‰[:RGB’l‚É•‰‚Ì’l‚Íg‚¦‚È‚¢");
+				System.out.println("ã‚¨ãƒ©ãƒ¼:RGBå€¤ã«è² ã®å€¤ã¯ä½¿ãˆãªã„");
 				return false;
 			}
 			if(Red > maxValue || Green > maxValue || Blue > maxValue){
-				System.out.println("ƒGƒ‰[F" + bitPerPixel +"bpp‚È‚Ì‚ÅRGB’l‚ÌÅ‘å’l‚Í" + maxValue);
+				System.out.println("ã‚¨ãƒ©ãƒ¼ï¼š" + bitPerPixel +"bppãªã®ã§RGBå€¤ã®æœ€å¤§å€¤ã¯" + maxValue);
 				return false;
 			}
 			return true;

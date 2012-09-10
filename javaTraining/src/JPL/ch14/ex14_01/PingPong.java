@@ -1,4 +1,4 @@
-package JPL.ch14.ex14_1;
+package JPL.ch14.ex14_01;
 
 public class PingPong implements Runnable{
 	
@@ -32,8 +32,8 @@ public class PingPong implements Runnable{
 		Thread thread1 = new Thread(ping, "Tiger");
 		Thread thread2 = new Thread(pong, "Dragon");
 		
-		System.out.println("thread1‚Ì–¼‘OF" + thread1.getName());
-		System.out.println("thread2‚Ì–¼‘OF" + thread2.getName());
+		System.out.println("thread1ï¿½Ì–ï¿½ï¿½Oï¿½F" + thread1.getName());
+		System.out.println("thread2ï¿½Ì–ï¿½ï¿½Oï¿½F" + thread2.getName());
 		
 		thread1.start();
 		thread2.start();

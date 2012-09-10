@@ -1,4 +1,4 @@
-package JPL.ch14.ex14_6;
+package JPL.ch14.ex14_06;
 
 public class Time extends Thread{
 	
@@ -10,7 +10,7 @@ public class Time extends Thread{
 	}
 	
 	synchronized void showElapsedTime() throws InterruptedException{
-		int timeInterval = 1000;//ƒ~ƒŠ•b
+		int timeInterval = 1000;//ï¿½~ï¿½ï¿½ï¿½b
 		int timeScale = 1000;
 		long start = System.currentTimeMillis();
 		long end;
@@ -19,7 +19,7 @@ public class Time extends Thread{
 				//message.wait();
 				wait(timeInterval);
 				end = System.currentTimeMillis();
-				System.out.println((int)((end - start)/timeScale) + "•bŒo‰ß");
+				System.out.println((int)((end - start)/timeScale) + "ï¿½bï¿½oï¿½ï¿½");
 				//message.notifyAll();
 			}
 		}

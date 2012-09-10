@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -107,8 +108,8 @@ public class MyFrame extends JFrame implements ActionListener{
 	JButton mButton;
 	
 	public MyFrame(){
-		display1 = new Display("ƒCƒ“ƒXƒ^ƒ“ƒXƒŠƒXƒg");
-		display2 = new Display("ƒNƒ‰ƒXî•ñ");
+		display1 = new Display("ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒªã‚¹ãƒˆ");
+		display2 = new Display("ã‚¯ãƒ©ã‚¹æƒ…å ±");
 		display = new Display();
 		Interpret ip = new Interpret(display, display1, display2);
 		
@@ -116,7 +117,7 @@ public class MyFrame extends JFrame implements ActionListener{
 		GridBagConstraints gbc = new GridBagConstraints();
 		setLayout(gbl);
 		
-		label = new JLabel("ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚½‚¢ƒNƒ‰ƒX–¼‚ğ“ü—Í");
+		label = new JLabel("ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ãŸã„ã‚¯ãƒ©ã‚¹åã‚’å…¥åŠ›");
 		add(0, 0, 5, 1, label, gbl, gbc);
 		text = new JTextField(40);
 		add(0, 1, 10, 1, text, gbl, gbc);
@@ -124,25 +125,25 @@ public class MyFrame extends JFrame implements ActionListener{
 		button.addActionListener(this);
 		add(0, 2, 1, 1, button, gbl, gbc);
 		
-//		printButton = new JButton("‘S•”•\¦");
+//		printButton = new JButton("å…¨éƒ¨è¡¨ç¤º");
 //		printButton.addActionListener(this);
 //		add(1, 2, 2, 1, printButton, gbl, gbc);
 		
-		printFieldButton = new JButton("ƒtƒB[ƒ‹ƒh");
+		printFieldButton = new JButton("ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰");
 		printFieldButton.addActionListener(this);
 		add(2, 2, 1, 1, printFieldButton, gbl, gbc);
 		
-		printConstructorButton = new JButton("ƒRƒ“ƒXƒgƒ‰ƒNƒ^");
+		printConstructorButton = new JButton("ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿");
 		printConstructorButton.addActionListener(this);
 		add(3, 2, 2, 1, printConstructorButton, gbl, gbc);
 		
-		printMethodButton = new JButton("ƒƒ\ƒbƒh");
+		printMethodButton = new JButton("ãƒ¡ã‚½ãƒƒãƒ‰");
 		printMethodButton.addActionListener(this);
 		add(5, 2, 2, 1, printMethodButton, gbl, gbc);
 		
-		cLabel0 = new JLabel("ƒCƒ“ƒXƒ^ƒ“ƒX–¼");
+		cLabel0 = new JLabel("ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å");
 		add(0, 3, 2, 1, cLabel0, gbl, gbc);
-		cLabel = new JLabel("ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ìˆø”‚ğu,v‚Å‹æØ‚Á‚Ä“ü—Í");
+		cLabel = new JLabel("ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®å¼•æ•°ã‚’ã€Œ,ã€ã§åŒºåˆ‡ã£ã¦å…¥åŠ›");
 		add(2, 3, 5, 1, cLabel, gbl, gbc);
 		cText0 = new JTextField(10);
 		add(0, 4, 2, 1, cText0, gbl, gbc);
@@ -152,9 +153,9 @@ public class MyFrame extends JFrame implements ActionListener{
 		cButton.addActionListener(this);
 		add(0, 5, 1, 1, cButton, gbl, gbc);
 		
-		aLabel0 = new JLabel("”z—ñ–¼");
+		aLabel0 = new JLabel("é…åˆ—å");
 		add(0, 6, 2, 1, aLabel0, gbl, gbc);
-		aLabel = new JLabel("¶¬‚·‚é”z—ñ‚ÌŒ^‚ÆƒTƒCƒY‚ğu,v‚Å‹æØ‚Á‚Ä“ü—Í");
+		aLabel = new JLabel("ç”Ÿæˆã™ã‚‹é…åˆ—ã®å‹ã¨ã‚µã‚¤ã‚ºã‚’ã€Œ,ã€ã§åŒºåˆ‡ã£ã¦å…¥åŠ›");
 		add(2, 6, 5, 1, aLabel, gbl, gbc);
 		aText0 = new JTextField(10);
 		add(0, 7, 2, 1, aText0, gbl, gbc);
@@ -164,9 +165,9 @@ public class MyFrame extends JFrame implements ActionListener{
 		aButton.addActionListener(this);
 		add(0, 8, 1, 1, aButton, gbl, gbc);
 		
-		asLabel0 = new JLabel("”z—ñ–¼");
+		asLabel0 = new JLabel("é…åˆ—å");
 		add(0, 9, 2, 1, asLabel0, gbl, gbc);
-		asLabel = new JLabel("ƒCƒ“ƒfƒbƒNƒX‚Æİ’è‚·‚é’l‚ğu,v‚Å‹æØ‚Á‚Ä“ü—Í");
+		asLabel = new JLabel("å–å¾—: ã€Œã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€  or è¨­å®š: ã€Œã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹, å€¤ã€");
 		add(2, 9, 5, 1, asLabel, gbl, gbc);
 		asText0 = new JTextField(10);
 		add(0, 10, 2, 1, asText0, gbl, gbc);
@@ -176,9 +177,9 @@ public class MyFrame extends JFrame implements ActionListener{
 		asButton.addActionListener(this);
 		add(0, 11, 1, 1, asButton, gbl, gbc);
 		
-		fLabel0 = new JLabel("ƒCƒ“ƒXƒ^ƒ“ƒX–¼");
+		fLabel0 = new JLabel("ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å");
 		add(0, 12, 2, 1, fLabel0, gbl, gbc);
-		fLabel = new JLabel("æ“¾: uƒtƒB[ƒ‹ƒhv  or İ’è: uƒtƒB[ƒ‹ƒhv, u’lv");
+		fLabel = new JLabel("å–å¾—: ã€Œãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã€  or è¨­å®š: ã€Œãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰, å€¤ã€");
 		add(2, 12, 5, 1, fLabel, gbl, gbc);
 		fText0 = new JTextField(10);
 		add(0, 13, 2, 1, fText0, gbl, gbc);
@@ -188,9 +189,9 @@ public class MyFrame extends JFrame implements ActionListener{
 		fButton.addActionListener(this);
 		add(0, 14, 1, 1, fButton, gbl, gbc);
 		
-		mLabel0 = new JLabel("ƒCƒ“ƒXƒ^ƒ“ƒX–¼");
+		mLabel0 = new JLabel("ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å");
 		add(0, 15, 2, 1, mLabel0, gbl, gbc);
-		mLabel = new JLabel("ƒƒ\ƒbƒh–¼A ˆø”‚ğu,v‚Å‹æØ‚Á‚Ä“ü—Í");
+		mLabel = new JLabel("ãƒ¡ã‚½ãƒƒãƒ‰åã€ å¼•æ•°ã‚’ã€Œ,ã€ã§åŒºåˆ‡ã£ã¦å…¥åŠ›");
 		add(2, 15, 5, 1, mLabel, gbl, gbc);
 		mText0 = new JTextField(10);
 		add(0, 16, 2, 1, mText0, gbl, gbc);
@@ -218,7 +219,7 @@ public class MyFrame extends JFrame implements ActionListener{
 	@SuppressWarnings({ "unchecked", "unused" })
 	public void actionPerformed(ActionEvent e){		
 		if(e.getSource().equals(button)){
-			//ƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚Ìæ“¾
+			//ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—
 			cls = Interpret.getClass(text.getText());
 		}
 		else if(e.getSource().equals(printButton)){
@@ -234,19 +235,19 @@ public class MyFrame extends JFrame implements ActionListener{
 			Interpret.printMethods(cls);
 		}
 		else if(e.getSource().equals(cButton)){
-			//ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ìˆø”‚ğæ“¾‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX¶¬
-			//ƒ†[ƒU‚ªw’è‚µ‚½•¶š—ñ‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚Ì”z—ñ‚ğ¶¬‚µ‚ÄƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ìˆø”‚Æ‚µ‚Ä—˜—pB
+			//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®å¼•æ•°ã‚’å–å¾—ã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+			//ãƒ¦ãƒ¼ã‚¶ãŒæŒ‡å®šã—ãŸæ–‡å­—åˆ—ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®é…åˆ—ã‚’ç”Ÿæˆã—ã¦ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®å¼•æ•°ã¨ã—ã¦åˆ©ç”¨ã€‚
+			String name = cText0.getText();
+			if(objectMap.containsKey(name)){
+				display.append("ãã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åã¯æ—¢ã«ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™\r\n");
+				throw new IllegalArgumentException();
+			}
+	
 			if(cText.getText().equals(null) || cText.getText().equals("")){
-				try {
-					String name = cText0.getText();
-					if(objectMap.containsKey(name)){
-						display.append("‚»‚ÌƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·\r\n");
-					}
-					else{
-						o = Interpret.getInstance(cls);
-						objectMap.put(name, o);
-					}
-
+				try{
+					o = Interpret.getInstance(cls);
+					objectMap.put(name, o);
+					display1.append(cText0.getText() + "\r\n");
 				} catch (IllegalArgumentException e1) {
 					e1.printStackTrace();
 					display.append("IllegalArgumentException\r\n");
@@ -271,69 +272,93 @@ public class MyFrame extends JFrame implements ActionListener{
 					display.append("NoSuchMethodException\r\n");
 				}
 			}
-			else{//ƒ†[ƒU‚ªw’è‚µ‚½•¶š—ñ‚ğƒL[‚Æ‚·‚éƒIƒuƒWƒFƒNƒg‚ªmap‚É‚ ‚ê‚Îæ“¾B‚È‚¯‚ê‚Î•¶š—ñ‚ğˆø”‚Æ‚µ‚Äˆµ‚¤B
+			else{//ãƒ¦ãƒ¼ã‚¶ãŒæŒ‡å®šã—ãŸæ–‡å­—åˆ—ã‚’ã‚­ãƒ¼ã¨ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒmapã«ã‚ã‚Œã°å–å¾—ã€‚ãªã‘ã‚Œã°æ–‡å­—åˆ—ã‚’å¼•æ•°ã¨ã—ã¦æ‰±ã†ã€‚
+				System.out.println("cText.getText(): "+cText.getText());
 				String[] str = cText.getText().split(",");
 				Object[] args = new Object[str.length];
 				for(int i = 0; i < args.length; i++){
-					try {
-//						if(objectMap.get(str[i]) != null){
-//							args[i] = objectMap.get(str[i]);
-//						}
-//						else{
-//							args[i] = str[i];
-//						}
-						//ˆø”‚ª”z—ñ‚Ìê‡
-						if(str[i].contains("[")){
-							String key = str[i].substring(0, str[i].indexOf("["));
-							int index = Integer.parseInt(str[i].substring(str[i].indexOf("[")+1, str[i].indexOf("]")));
-							args[i] = Interpret.getElement((Object[])objectMap.get(key), index);
-						}
-						else{//ˆø”‚ª”z—ñˆÈŠO‚Ìê‡
-							//objectMap‚ÉƒL[‚ª‘¶İ‚·‚éê‡
-							if(objectMap.get(str[i]) != null){
-								args[i] = objectMap.get(str[i]);
-							}
-							else{
-								try{
-									args[i] = Integer.parseInt(str[i]);
-								}
-								catch(NumberFormatException e1){
-									if(str[i].equals("true") || str[i].equals("false")){
-										args[i] = Boolean.parseBoolean(str[i]);
-									}
-									else{
-										args[i] = str[i];
-									}
-								}
-							}
-						}
-//						args[i] = Interpret.getInstance(Interpret.getClass(str[i]));
-						o = Interpret.getInstance(cls, args);
-						objectMap.put(cText0.getText(), o);
-						display1.append(cText0.getText() + "\r\n");
-					} catch (IllegalArgumentException e1) {
-						e1.printStackTrace();
-						display.append("IllegalArgumentException\r\n");
-					} catch (SecurityException e1) {
-						e1.printStackTrace();
-						display.append("SecurityException\r\n");
-					} catch (InstantiationException e1) {
-						e1.printStackTrace();
-						display.append("InstantiationException\r\n");
-					} catch (IllegalAccessException e1) {
-						e1.printStackTrace();
-						display.append("IllegalAccessException\r\n");
-					} catch (InvocationTargetException e1) {
-						e1.printStackTrace();
-						display.append("InvocationTargetException\r\n");
-						display.append(e1.getCause().toString() + "\r\n");
-					} catch (ClassNotFoundException e1) {
-						e1.printStackTrace();
-						display.append("ClassNotFoundException\r\n");
-					} catch (NoSuchMethodException e1) {
-						e1.printStackTrace();
-						display.append("NoSuchMethodException\r\n");
+					//å¼•æ•°ãŒé…åˆ—ã®å ´åˆ
+					if(str[i].contains("[")){
+						String key = str[i].substring(0, str[i].indexOf("["));
+						int index = Integer.parseInt(str[i].substring(str[i].indexOf("[")+1, str[i].indexOf("]")));
+						args[i] = Interpret.getElement((Object[])objectMap.get(key), index);
 					}
+					//å¼•æ•°ãŒãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å ´åˆ
+					else if(str[i].contains(".")){
+						String key = str[i].substring(0, str[i].lastIndexOf("."));
+						String fieldName = str[i].substring(str[i].lastIndexOf(".")+1);
+						try {//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ã‚¢ã‚¯ã‚»ã‚¹
+							if(objectMap.get(key) != null){
+								args[i] = Interpret.getField(objectMap.get(key), fieldName);
+							}
+							else{//ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰staticãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ã‚¢ã‚¯ã‚»ã‚¹
+								Class<?> cls = Interpret.getClass(key);
+								Field field = cls.getField(fieldName);
+								Object value = field.get(null);
+								args[i] = value;
+							}
+						} catch (SecurityException e1) {
+							e1.printStackTrace();
+							display.append("SecurityException\r\n");
+						} catch (IllegalArgumentException e1) {
+							e1.printStackTrace();
+							display.append("IllegalArgumentException\r\n");
+						} catch (NoSuchFieldException e1) {
+							e1.printStackTrace();
+							display.append("NoSuchFieldException\r\n");
+						} catch (IllegalAccessException e1) {
+							e1.printStackTrace();
+							display.append("IllegalAccessException\r\n");
+						}
+					}
+					else{//å¼•æ•°ãŒé…åˆ—ä»¥å¤–ã®å ´åˆ
+						//objectMapã«ã‚­ãƒ¼ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+						if(objectMap.get(str[i]) != null){
+							args[i] = objectMap.get(str[i]);
+						}
+						else{
+							try{
+								args[i] = Integer.parseInt(str[i]);
+								System.out.println("MyFrame: "+args[i]);
+							}
+							catch(NumberFormatException e1){
+								if(str[i].equals("true") || str[i].equals("false")){
+									args[i] = Boolean.parseBoolean(str[i]);
+								}
+								else{
+									args[i] = str[i];
+								}
+							}
+						}
+					}
+				}
+					
+				try {
+					o = Interpret.getInstance(cls, args);
+					objectMap.put(name, o);
+					display1.append(cText0.getText() + "\r\n");
+				} catch (IllegalArgumentException e1) {
+					e1.printStackTrace();
+					display.append("IllegalArgumentException\r\n");
+				} catch (SecurityException e1) {
+					e1.printStackTrace();
+					display.append("SecurityException\r\n");
+				} catch (InstantiationException e1) {
+					e1.printStackTrace();
+					display.append("InstantiationException\r\n");
+				} catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+					display.append("IllegalAccessException\r\n");
+				} catch (InvocationTargetException e1) {
+					e1.printStackTrace();
+					display.append("InvocationTargetException\r\n");
+					display.append(e1.getCause().toString() + "\r\n");
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+					display.append("ClassNotFoundException\r\n");
+				} catch (NoSuchMethodException e1) {
+					e1.printStackTrace();
+					display.append("NoSuchMethodException\r\n");
 				}
 			}
 		}
@@ -352,7 +377,7 @@ public class MyFrame extends JFrame implements ActionListener{
 					display1.append(arrayName + "\r\n");
 				}
 				else{
-					display.append("‚»‚Ì”z—ñ–¼‚ÍŠù‚Ég—p‚³‚ê‚Ä‚¢‚Ü‚·");
+					display.append("ãã®é…åˆ—åã¯æ—¢ã«ä½¿ç”¨ã•ã‚Œã¦ã„ã¾ã™");
 				}
 				
 				
@@ -365,58 +390,76 @@ public class MyFrame extends JFrame implements ActionListener{
 		else if(e.getSource().equals(asButton)){
 			String[] str = asText.getText().split(",");
 			String arrayName = asText0.getText(); 
-			//str[0]: index
-			int index = Integer.parseInt(str[0]);
-			//”z—ñ‚ğæ“¾
+			//é…åˆ—ã‚’å–å¾—
 			o = objectMap.get(arrayName);
-			//”z—ñ‚ÌƒNƒ‰ƒX–¼‚ğæ“¾
-//			Class<?> arrType = o.getClass();
-//			System.out.println("arrType"+arrType.getName());
-			Object value;
 			
-			//ˆø”‚ª”z—ñ‚Ìê‡
-			if(str[1].contains("[")){
-				String key = str[1].substring(0, str[1].indexOf("["));
-				int index2 = Integer.parseInt(str[1].substring(str[1].indexOf("[")+1, str[1].indexOf("]")));
-				value = Interpret.getElement((Object[])objectMap.get(key), index2);
-			}
-			else{//ˆø”‚ª”z—ñˆÈŠO‚Ìê‡
-				if(objectMap.get(str[1]) != null){
-					value = objectMap.get(str[1]);
-				}
-				else{
-					try{
-						value = Integer.parseInt(str[1]);
-					}
-					catch(NumberFormatException e1){
-						if(str[1].equals("true") || str[1].equals("false")){
-							value = Boolean.parseBoolean(str[1]);
-						}
-						else{
-							value = str[1];
-						}
-					}
+			if(str.length == 1){
+				try {
+					Integer index = Integer.parseInt(str[0]);
+					display.append("\r\né…åˆ—ã®å€¤ã‚’å–å¾—: \r\n" + Interpret.getElement((Object[])o, index));
+				} catch (SecurityException e1) {
+					e1.printStackTrace();
+					display.append("SecurityException\r\n");
+				} catch (IllegalArgumentException e1) {
+					e1.printStackTrace();
+					display.append("IllegalArgumentException\r\n");
 				}
 			}
-//			System.out.println("”z—ñ‚É’l‚ğ‘ã“üB ƒCƒ“ƒfƒbƒNƒX: " + index + " " + "—v‘fŒ^: " + value.getClass().getName());
-
-			//o.get(index)‚Ævalue‚Í“¯‚¶Œ^‚Å‚ ‚é•K—v‚ª‚ ‚é
-//			oArr[index] = value.getClass().cast(oArr[index]);
-
-			Interpret.setElement((Object[])o, value, index);
+			else{
+				//str[0]: index
+				int index = Integer.parseInt(str[0]);
+				//é…åˆ—ã®ã‚¯ãƒ©ã‚¹åã‚’å–å¾—
+	//			Class<?> arrType = o.getClass();
+	//			System.out.println("arrType"+arrType.getName());
+				Object value;
+				
+				//å¼•æ•°ãŒé…åˆ—ã®å ´åˆ
+				if(str[1].contains("[")){
+					String key = str[1].substring(0, str[1].indexOf("["));
+					int index2 = Integer.parseInt(str[1].substring(str[1].indexOf("[")+1, str[1].indexOf("]")));
+					value = Interpret.getElement((Object[])objectMap.get(key), index2);
+				}
+				else{//å¼•æ•°ãŒé…åˆ—ä»¥å¤–ã®å ´åˆ
+					if(objectMap.get(str[1]) != null){
+						value = objectMap.get(str[1]);
+					}
+					else{
+						try{
+							value = Integer.parseInt(str[1]);
+						}
+						catch(NumberFormatException e1){
+							if(str[1].equals("true") || str[1].equals("false")){
+								value = Boolean.parseBoolean(str[1]);
+							}
+							else{
+								value = str[1];
+							}
+						}
+					}
+				}
+	
+				try {
+					Interpret.setElement((Object[])o, value, index);
+				} catch (Throwable e1) {
+					//æ©Ÿèƒ½ã—ãªã„â€¦
+					e1.printStackTrace();
+					display.append(e1.getCause().toString());
+				}
+			}
+			
 		}
 		else if(e.getSource().equals(fButton)){
 			Object arg = new Object();
 			String[] str = fText.getText().split(",");
 			
 			String name = fText0.getText();
-			//ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ª”z—ñ‚Ìê‡
+			//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åãŒé…åˆ—ã®å ´åˆ
 			if(name.contains("[")){
 				String key = name.substring(0, name.indexOf("["));
 				int index = Integer.parseInt(name.substring(name.indexOf("[")+1, name.indexOf("]")));
 				o = Interpret.getElement((Object[])objectMap.get(key), index);
 			}
-			//ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ª”z—ñˆÈŠO‚Ìê‡
+			//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åãŒé…åˆ—ä»¥å¤–ã®å ´åˆ
 			else{
 				o = objectMap.get(name);
 			}
@@ -439,13 +482,13 @@ public class MyFrame extends JFrame implements ActionListener{
 				}
 			}
 			else{
-				//ˆø”‚ª”z—ñ‚Ìê‡
+				//å¼•æ•°ãŒé…åˆ—ã®å ´åˆ
 				if(str[1].contains("[")){
 					String key = str[1].substring(0, str[1].indexOf("["));
 					int index = Integer.parseInt(str[1].substring(str[1].indexOf("[")+1, str[1].indexOf("]")));
 					arg = Interpret.getElement((Object[])objectMap.get(key), index);
 				}
-				else{//ˆø”‚ª”z—ñˆÈŠO‚Ìê‡
+				else{//å¼•æ•°ãŒé…åˆ—ä»¥å¤–ã®å ´åˆ
 					if(objectMap.get(str[1]) != null){
 						arg = objectMap.get(str[1]);
 					}
@@ -483,17 +526,17 @@ public class MyFrame extends JFrame implements ActionListener{
 		else if(e.getSource().equals(mButton)){
 			String[] str = mText.getText().split(",");
 			String name = mText0.getText();
-			//ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ª”z—ñ‚Ìê‡
+			//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åãŒé…åˆ—ã®å ´åˆ
 			if(name.contains("[")){
 				String key = name.substring(0, name.indexOf("["));
 				int index = Integer.parseInt(name.substring(name.indexOf("[")+1, name.indexOf("]")));
 				o = Interpret.getElement((Object[])objectMap.get(key), index);
 			}
-			//ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ª”z—ñˆÈŠO‚Ìê‡
+			//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åãŒé…åˆ—ä»¥å¤–ã®å ´åˆ
 			else{
 				o = objectMap.get(name);
 			}
-			//ˆø”‚È‚µ
+			//å¼•æ•°ãªã—
 			if(str.length == 1){
 				try {
 					Interpret.invoke(o, str[0]);
@@ -508,18 +551,46 @@ public class MyFrame extends JFrame implements ActionListener{
 					display.append("ClassNotFoundException\r\n");
 				}
 			}
-			//ˆø”‚ ‚è
+			//å¼•æ•°ã‚ã‚Š
 			else{
 				Object[] args = new Object[str.length - 1];
 				for(int i = 0; i < args.length; i++){
-					//ˆø”‚ª”z—ñ‚Ìê‡
+					//å¼•æ•°ãŒé…åˆ—ã®å ´åˆ
 					if(str[i + 1].contains("[")){
 						String key = str[i + 1].substring(0, str[i + 1].indexOf("["));
 						int index = Integer.parseInt(str[i + 1].substring(str[i + 1].indexOf("[")+1, str[i + 1].indexOf("]")));
 						args[i] = Interpret.getElement((Object[])objectMap.get(key), index);
 					}
-					else{//ˆø”‚ª”z—ñˆÈŠO‚Ìê‡
-						//objectMap‚ÉƒL[‚ª‘¶İ‚·‚éê‡
+					//å¼•æ•°ãŒãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å ´åˆ
+					else if(str[i + 1].contains(".")){
+						String key = str[i + 1].substring(0, str[i + 1].lastIndexOf("."));
+						String fieldName = str[i + 1].substring(str[i + 1].lastIndexOf(".")+1);
+						try {//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ã‚¢ã‚¯ã‚»ã‚¹
+							if(objectMap.get(key) != null){
+								args[i] = Interpret.getField(objectMap.get(key), fieldName);
+							}
+							else{//ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰staticãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ã‚¢ã‚¯ã‚»ã‚¹
+								Class<?> cls = Interpret.getClass(key);
+								Field field = cls.getField(fieldName);
+								Object value = field.get(null);
+								args[i] = value;
+							}
+						} catch (SecurityException e1) {
+							e1.printStackTrace();
+							display.append("SecurityException\r\n");
+						} catch (IllegalArgumentException e1) {
+							e1.printStackTrace();
+							display.append("IllegalArgumentException\r\n");
+						} catch (NoSuchFieldException e1) {
+							e1.printStackTrace();
+							display.append("NoSuchFieldException\r\n");
+						} catch (IllegalAccessException e1) {
+							e1.printStackTrace();
+							display.append("IllegalAccessException\r\n");
+						}
+					}
+					else{//å¼•æ•°ãŒé…åˆ—ã€ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ä»¥å¤–ã®å ´åˆ
+						//objectMapã«ã‚­ãƒ¼ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
 						if(objectMap.get(str[1]) != null){
 							args[i] = objectMap.get(str[i + 1]);
 						}

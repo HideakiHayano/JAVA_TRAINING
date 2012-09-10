@@ -1,11 +1,11 @@
-package JPL.ch14.ex14_3;
+package JPL.ch14.ex14_03;
 
 public class Number extends Thread{
 
 	int value;
 	synchronized void add(int value){
 			this.value += value;
-			System.out.println(value + "â¡éZÅB " + "åªç›ÇÃílÅF" + this.value);
+			System.out.println("added value: " + value + " result value: " + this.value);
 	}
 
 	public static void main(String[] args) {

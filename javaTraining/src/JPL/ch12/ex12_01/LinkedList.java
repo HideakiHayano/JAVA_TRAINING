@@ -1,4 +1,4 @@
-package JPL.ch12.ex12_1;
+package JPL.ch12.ex12_01;
 
 public class LinkedList<E>{
 	
@@ -22,19 +22,19 @@ public class LinkedList<E>{
 	}
 	
 	/**
-	 * Node‚Ìkey‚ğ‚à‚Æ‚ÉŒŸõ
-	 * @param key Node‚ğ¯•Ê‚·‚é‚½‚ß‚Ìkey
+	 * Nodeï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ÉŒï¿½ï¿½ï¿½
+	 * @param key Nodeï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½é‚½ï¿½ß‚ï¿½key
 	 * @return
 	 */
 	public Node<E> find(String key)throws ObjectNotFoundException{
 		Node<E> top = firstNode;
 		
 		for(int i=0; i<numOfElements; i++){
-			if(key.equals(top.key) == false){//key‚ªˆê’v‚µ‚È‚¯‚ê‚ÎŸ‚Ì—v‘f‚Ö
+			if(key.equals(top.key) == false){//keyï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Îï¿½ï¿½Ì—vï¿½fï¿½ï¿½
 				top = top.getNext();
 			}
-			else{//key‚ªˆê’v‚·‚ê‚Îreturn
-				System.out.println(key + "‚ªŒ©‚Â‚©‚è‚Ü‚µ‚½!!");
+			else{//keyï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½return
+				System.out.println(key + " was found!!");
 				return top;
 			}
 		}
@@ -77,7 +77,7 @@ public class LinkedList<E>{
 		}
 		
 		try {
-			list.find("”òs‹@");
+			list.find("AndyCar");
 		} catch (ObjectNotFoundException e) {
 			e.printStackTrace();
 		}

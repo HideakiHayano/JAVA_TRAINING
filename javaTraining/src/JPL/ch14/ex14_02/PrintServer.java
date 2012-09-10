@@ -1,6 +1,6 @@
-package JPL.ch14.ex14_2;
+package JPL.ch14.ex14_02;
 
-import JPL.ch14.ex14_1.PingPong;
+import JPL.ch14.ex14_01.PingPong;
 
 public class PrintServer implements Runnable{
 	Thread thread = new Thread();
@@ -14,17 +14,20 @@ public class PrintServer implements Runnable{
 			System.out.println("run()");
 		}
 		else{
-			System.out.println("ƒAƒNƒZƒXˆá”½");
+			System.out.println("This thread is not allowed to run.");
 		}
 	}
 	
 	public static void main(String[] args) {
-		Runnable ps1 = new PrintServer();//³“–‚ÈƒAƒNƒZƒXBƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Å¶¬‚³‚ê‚½ƒXƒŒƒbƒh‚É‚æ‚érun()‚ÌÀsB
-		Runnable ps2 = new PrintServer();//³“–‚ÈƒAƒNƒZƒXBƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Å¶¬‚³‚ê‚½ƒXƒŒƒbƒh‚É‚æ‚érun()‚ÌÀsB
+		//create threads allowed to run
+		Runnable ps1 = new PrintServer();//ï¿½ï¿½ï¿½ï¿½ï¿½ÈƒAï¿½Nï¿½Zï¿½Xï¿½Bï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½É‚ï¿½ï¿½run()ï¿½Ìï¿½ï¿½sï¿½B
+		Runnable ps2 = new PrintServer();//ï¿½ï¿½ï¿½ï¿½ï¿½ÈƒAï¿½Nï¿½Zï¿½Xï¿½Bï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½É‚ï¿½ï¿½run()ï¿½Ìï¿½ï¿½sï¿½B
+		
+		//create threads NOT allowed to run
 		Thread thread1 = new Thread(ps1, "Tiger");
 		Thread thread2 = new Thread(ps2, "Dragon");
-		thread1.start();//ƒAƒNƒZƒXˆá”½
-		thread2.start();//ƒAƒNƒZƒXˆá”½
+		thread1.start();//ï¿½Aï¿½Nï¿½Zï¿½Xï¿½á”½
+		thread2.start();//ï¿½Aï¿½Nï¿½Zï¿½Xï¿½á”½
 	}
 
 }

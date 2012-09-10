@@ -1,4 +1,4 @@
-package JPL.ch16.ex16_4;
+package JPL.ch16.ex16_04;
 
 public @interface BugsFixed {
 

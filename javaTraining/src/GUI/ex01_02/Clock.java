@@ -1,4 +1,4 @@
-package GUI.ex1_2;
+package GUI.ex01_02;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -28,10 +28,10 @@ public class Clock extends Frame{
 	TimerTask timerTask = new Task();
 	
 	Clock(){
-		super("Œv");
+		super("ï¿½ï¿½ï¿½v");
 		super.setSize(400, 100);
 		
-		//’èŠú“I‚ÉTimerTask.run()‚ğÀs
+		//ï¿½ï¿½ï¿½Iï¿½ï¿½TimerTask.run()ï¿½ï¿½ï¿½ï¿½ï¿½s
 	    timer.scheduleAtFixedRate(timerTask, 0, 1000);
 	    
 		add(canvas);
@@ -110,25 +110,25 @@ public class Clock extends Frame{
 	
 	class MyMenuBar extends MenuBar{
 		MyMenuBar(){
-			Menu mn = new Menu("ƒƒjƒ…[");
-			Menu mn1 = new Menu("ƒvƒƒpƒeƒB");
-			Menu mnf = new Menu("ƒtƒHƒ“ƒg");
-			Menu mnbg = new Menu("”wŒi");
+			Menu mn = new Menu("ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[");
+			Menu mn1 = new Menu("ï¿½vï¿½ï¿½ï¿½pï¿½eï¿½B");
+			Menu mnf = new Menu("ï¿½tï¿½Hï¿½ï¿½ï¿½g");
+			Menu mnbg = new Menu("ï¿½wï¿½i");
 
 			mn1.add(mnf);
 			mn1.add(mnbg);
 			
-			Menu mnfk = new Menu("ƒtƒHƒ“ƒg‚Ìí—Ş");
-			Menu mnfs = new Menu("ƒtƒHƒ“ƒgƒTƒCƒY");
-			Menu mnfc = new Menu("•¶šF");
+			Menu mnfk = new Menu("ï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Ìï¿½ï¿½");
+			Menu mnfs = new Menu("ï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Tï¿½Cï¿½Y");
+			Menu mnfc = new Menu("ï¿½ï¿½ï¿½ï¿½ï¿½F");
 			
 			mnf.add(mnfk);
 			mnf.add(mnfs);
 			mnf.add(mnfc);
 			
-			MenuItem mifk1 = new MenuItem("•W€");
-			MenuItem mifk2 = new MenuItem("‘¾š");
-			MenuItem mifk3 = new MenuItem("ƒCƒ^ƒŠƒbƒN");
+			MenuItem mifk1 = new MenuItem("ï¿½Wï¿½ï¿½");
+			MenuItem mifk2 = new MenuItem("ï¿½ï¿½ï¿½ï¿½");
+			MenuItem mifk3 = new MenuItem("ï¿½Cï¿½^ï¿½ï¿½ï¿½bï¿½N");
 			mnfk.add(mifk1);
 			mnfk.add(mifk2);
 			mnfk.add(mifk3);
@@ -140,14 +140,14 @@ public class Clock extends Frame{
 			mnfs.add(mifs2);
 			mnfs.add(mifs3);
 			
-			MenuItem mifc1 = new MenuItem("•");
-			MenuItem mifc2 = new MenuItem("”’");
+			MenuItem mifc1 = new MenuItem("ï¿½ï¿½");
+			MenuItem mifc2 = new MenuItem("ï¿½ï¿½");
 			mnfc.add(mifc1);
 			mnfc.add(mifc2);
 			
-			MenuItem mibg1 = new MenuItem("Ô");
-			MenuItem mibg2 = new MenuItem("—Î");
-			MenuItem mibg3 = new MenuItem("‰©");
+			MenuItem mibg1 = new MenuItem("ï¿½ï¿½");
+			MenuItem mibg2 = new MenuItem("ï¿½ï¿½");
+			MenuItem mibg3 = new MenuItem("ï¿½ï¿½");
 			mnbg.add(mibg1);
 			mnbg.add(mibg2);
 			mnbg.add(mibg3);
@@ -175,14 +175,14 @@ public class Clock extends Frame{
 		class ActionAdapter implements ActionListener{
 		    public void actionPerformed(ActionEvent e) {
 
-		        if (e.getActionCommand() == "•W€"){
+		        if (e.getActionCommand() == "ï¿½Wï¿½ï¿½"){
 		        	canvas.setFontKind(Font.PLAIN);
 		        }
 
-		        if (e.getActionCommand() == "‘¾š"){
+		        if (e.getActionCommand() == "ï¿½ï¿½ï¿½ï¿½"){
 		        	canvas.setFontKind(Font.BOLD);
 		        }
-		        if (e.getActionCommand() == "ƒCƒ^ƒŠƒbƒN"){
+		        if (e.getActionCommand() == "ï¿½Cï¿½^ï¿½ï¿½ï¿½bï¿½N"){
 		        	canvas.setFontKind(Font.ITALIC);
 		        }
 		        
@@ -204,21 +204,21 @@ public class Clock extends Frame{
 		        	canvas.setFontSize(100);
 		        }
 		        
-		        if(e.getActionCommand() == "•"){
+		        if(e.getActionCommand() == "ï¿½ï¿½"){
 		        	canvas.setFontColor(Color.BLACK);
 		        }
 		        
-		        if(e.getActionCommand() == "”’"){
+		        if(e.getActionCommand() == "ï¿½ï¿½"){
 		        	canvas.setFontColor(Color.WHITE);
 		        }
 		        
-		        if(e.getActionCommand() == "Ô"){
+		        if(e.getActionCommand() == "ï¿½ï¿½"){
 		        	setBackGround(Color.RED);
 		        }
-		        if(e.getActionCommand() == "—Î"){
+		        if(e.getActionCommand() == "ï¿½ï¿½"){
 		        	setBackGround(Color.GREEN);
 		        }
-		        if(e.getActionCommand() == "‰©"){
+		        if(e.getActionCommand() == "ï¿½ï¿½"){
 		        	setBackGround(Color.YELLOW);
 		        }
 		   }

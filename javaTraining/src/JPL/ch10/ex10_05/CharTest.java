@@ -1,4 +1,4 @@
-package JPL.ch10.ex10_5;
+package JPL.ch10.ex10_05;
 
 public class CharTest {
 	
@@ -21,8 +21,8 @@ public class CharTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CharTest test = new CharTest();
-		char start = '‚ª';
-		char end = '‚ç';
+		char start = 'ï¿½ï¿½';
+		char end = 'ï¿½ï¿½';
 		test.showCharList(start, end);
 	}
 

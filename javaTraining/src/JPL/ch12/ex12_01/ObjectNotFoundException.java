@@ -1,10 +1,10 @@
-package JPL.ch12.ex12_1;
+package JPL.ch12.ex12_01;
 
 public class ObjectNotFoundException extends Exception{
 	public final String errorMessage;
 	
 	public ObjectNotFoundException(String name){
-		errorMessage = name + "‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½";
+		errorMessage = name + " ï¿½ÍŒwas not found.";
 		System.out.println(errorMessage);
 	}
 	

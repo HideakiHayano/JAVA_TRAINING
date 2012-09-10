@@ -1,9 +1,9 @@
-package JPL.ch16.ex16_2;
+package JPL.ch16.ex16_02;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
 
-import JPL.ch6.ex6_5.ColorOfTrafficLight;
+import JPL.ch06.ex06_05.ColorOfTrafficLight;
 
 public class TypeDesc {
 	private ArrayList list = new ArrayList();
@@ -12,20 +12,20 @@ public class TypeDesc {
 		return (ArrayList) list.clone();
 	}
 	
-	//•W€o—Í
+	//ï¿½Wï¿½ï¿½ï¿½oï¿½ï¿½
 	private java.io.PrintStream out = System.out;
 	
-	//Œ^–¼‚Éƒ‰ƒxƒ‹•t‚¯‚·‚éprintType()‚Åg—p‚³‚ê‚é
+	//ï¿½^ï¿½ï¿½ï¿½Éƒï¿½ï¿½xï¿½ï¿½ï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½printType()ï¿½Ågï¿½pï¿½ï¿½ï¿½ï¿½ï¿½
 	public static String[]
 			basic = {"class", "interface", "enum", "annotation"}, 
 	        supercl = {"extends", "implements"}, 
 	        iFace = {null, "extends"};
 	
 	public void printType(Type type, int depth, String[] labels){
-		if(type == null)//Ä‹NŒÄ‚Ño‚µ’â~FƒX[ƒp[ƒ^ƒCƒv‚ª‘¶İ‚µ‚È‚¢B
+		if(type == null)//ï¿½Ä‹Nï¿½Ä‚Ñoï¿½ï¿½ï¿½ï¿½~ï¿½Fï¿½Xï¿½[ï¿½pï¿½[ï¿½^ï¿½Cï¿½vï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½ï¿½B
 			return;
 		
-		//Type‚ğƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚É•ÏŠ·‚·‚é
+		//Typeï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½
 		Class<?> cls = null;
 		if(type instanceof Class<?>)
 			cls = (Class<?>)type;
@@ -35,13 +35,8 @@ public class TypeDesc {
 			throw new Error("Unexpected non-class type");
 		
 		if(cls.isMemberClass()){
-			out.println("‚±‚ÌƒNƒ‰ƒX‚ÍˆÈ‰º‚ÌƒNƒ‰ƒX‚Ü‚½‚ÍƒCƒ“ƒ^[ƒtƒF[ƒX‚ÉƒlƒXƒg‚µ‚Ä‚¢‚Ü‚·B");
 			out.print(cls.getDeclaringClass());
 		}
-		else{
-			out.println("‚±‚ÌƒNƒ‰ƒX‚ÍƒlƒXƒg‚µ‚Ä‚¢‚Ü‚¹‚ñ");
-		}
-		
 		for(int i = 0; i < depth; i++)
 			out.println(" ");
 			int kind = cls.isAnnotation() ? 3 : 
@@ -52,7 +47,7 @@ public class TypeDesc {
 				out.print(cls.getCanonicalName());
 			}
 			
-			//‚ ‚ê‚ÎAƒWƒFƒlƒŠƒbƒNŒ^ƒpƒ‰ƒ[ƒ^‚ğ•\¦
+			//ï¿½ï¿½ï¿½ï¿½ÎAï¿½Wï¿½Fï¿½lï¿½ï¿½ï¿½bï¿½Nï¿½^ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½\ï¿½ï¿½
 			TypeVariable<?>[] params = cls.getTypeParameters();
 			if(params.length > 0){
 				out.print('<');
@@ -62,24 +57,25 @@ public class TypeDesc {
 						out.print(", ");
 					}
 				}
-				out.println(">");
+				out.print(">");
 			}
 			else 
 				out.print("");
 			
-			//‚±‚ÌƒNƒ‰ƒX‚ªÀ‘•‚µ‚Ä‚¢‚é‘S‚Ä‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğ•\¦
+			//ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Sï¿½Ä‚ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½ï¿½\ï¿½ï¿½
 			Type[] interfaces = cls.getGenericInterfaces();
 			for(Type iface : interfaces){
 				printType(iface, depth + 1, cls.isInterface() ? iFace : supercl);
 			}
 			
-			//ƒX[ƒp[ƒNƒ‰ƒX‚É‘Î‚µ‚ÄÄ‹A
+			//ï¿½Xï¿½[ï¿½pï¿½[ï¿½Nï¿½ï¿½ï¿½Xï¿½É‘Î‚ï¿½ï¿½ÄÄ‹A
 			printType(cls.getGenericSuperclass(), depth + 1, supercl);
 			
 			list.add(cls);
 	}
 	
 	public static void main(String[] args) {
+		//Please input the value of "String[] args" from the settings of Java application.
 		TypeDesc desc = new TypeDesc();
 		for(String name : args){
 			try {

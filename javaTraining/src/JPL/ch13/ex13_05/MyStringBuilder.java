@@ -1,4 +1,4 @@
-package JPL.ch13.ex13_5;
+package JPL.ch13.ex13_05;
 
 public class MyStringBuilder {
 	
@@ -8,19 +8,19 @@ public class MyStringBuilder {
 //		try{
 //			Integer.parseInt(original);
 //		}catch(NumberFormatException e){
-//			System.out.println("”š‚Ì•¶š—ñ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+//			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		}
 		
 		StringBuffer buf = new StringBuffer(original);
-		buf = buf.reverse();//‰ºˆÊ‚©‚çƒPƒ^‚ğ”‚¦‚é‚½‚ß
+		buf = buf.reverse();//ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½Pï¿½^ï¿½ğ”‚ï¿½ï¿½é‚½ï¿½ï¿½
 		
-		//3ƒPƒ^‚²‚Æ‚É","‚ğ‘}“üB
-		//4*i‚É‚È‚Á‚Ä‚¢‚é‚Ì‚Í3ƒPƒ^+","‚Ì‚½‚ßB
-		//original.length()/3-1‚Æ‚È‚Á‚Ä‚¢‚é‚Ì‚ÍÅŒã‚É","‚ğ“ü‚ê‚È‚¢‚½‚ßB
+		//3ï¿½Pï¿½^ï¿½ï¿½ï¿½Æ‚ï¿½","ï¿½ï¿½}ï¿½ï¿½B
+		//4*iï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚ï¿½3ï¿½Pï¿½^+","ï¿½Ì‚ï¿½ï¿½ßB
+		//original.length()/3-1ï¿½Æ‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚ÍÅŒï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ßB
 		for(int i = 0; i < original.length()/3-1; i++){
 			buf.insert(3+4*i, COMMA);
 		}
-		//•¶š—ñ‚ğ‚à‚Æ‚Ì‡”Ô‚É–ß‚·
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚Ìï¿½ï¿½Ô‚É–ß‚ï¿½
 		return buf.reverse().toString();
 	}
 	

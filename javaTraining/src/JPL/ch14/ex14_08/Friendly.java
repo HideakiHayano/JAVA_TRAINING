@@ -1,4 +1,4 @@
-package JPL.ch14.ex14_8;
+package JPL.ch14.ex14_08;
 
 public class Friendly{
 	
@@ -7,8 +7,8 @@ public class Friendly{
 	private static long num;
 	private long lockOrder;
 	
-	//ƒIƒuƒWƒFƒNƒg¶¬‚ÉƒƒbƒN‚Ìæ“¾‡”Ô‚ğ’è‹`‚µƒNƒ‰ƒX•Ï”‚ÅŠÇ—‚·‚éB•¡”‚ÌƒXƒŒƒbƒh‚©‚ç“¯‚É
-	//ƒNƒ‰ƒX•Ï”‚ÉƒAƒNƒZƒX‚³‚ê‚é‚Æ¢‚é‚Ì‚Å”r‘¼§Œä‚·‚éB
+	//ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒï¿½ï¿½bï¿½Nï¿½Ìæ“¾ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½`ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Ïï¿½ï¿½ÅŠÇ—ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ç“¯ï¿½ï¿½ï¿½ï¿½
+	//ï¿½Nï¿½ï¿½ï¿½Xï¿½Ïï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½Ì‚Å”rï¿½ï¿½ï¿½ï¿½ï¿½ä‚·ï¿½ï¿½B
 	public Friendly(String name){
 		this.name = name;
 		synchronized(Friendly.class){

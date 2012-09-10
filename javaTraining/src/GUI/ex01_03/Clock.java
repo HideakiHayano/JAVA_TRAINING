@@ -1,4 +1,4 @@
-package GUI.ex1_3;
+package GUI.ex01_03;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import GUI.ex1_3.MyFrame.MyMenuBar.ActionAdapter;
+import GUI.ex01_03.MyFrame.MyMenuBar.ActionAdapter;
 
 public class Clock extends Window{
 	

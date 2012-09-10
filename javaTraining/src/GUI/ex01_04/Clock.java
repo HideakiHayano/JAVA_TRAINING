@@ -1,9 +1,10 @@
-package GUI.ex1_4;
+package GUI.ex01_04;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +24,12 @@ public class Clock extends Frame {
 	int bgGreen;
 	int bgBlue;
 	
+	String fStyle;
+	int fSize;
+	int fRed;
+	int fGreen;
+	int fBlue;
+	
 	Preferences prefs;
 	static final String BGRED= "bgred";
 	static final String BGGREEN= "bggreen";
@@ -31,10 +38,14 @@ public class Clock extends Frame {
     static final String LOCATION_Y = "locationY";
     static final String WIDTH = "width";
     static final String HEIGHT = "height";
-
+    static final String FONTSTYLE = "fontstyle";
+    static final String FONTSIZE = "fontsize";
+    static final String FRED = "fred";
+    static final String FGREEN = "fgreen";
+    static final String FBLUE = "fblue";
+    
     int locationX;
     int locationY;
-    
     
 	public void save(){
 		Rectangle rect = this.getBounds();
@@ -42,6 +53,17 @@ public class Clock extends Frame {
 		prefs.putInt(LOCATION_Y, rect.y);
 		prefs.putInt(WIDTH, rect.width);
 		prefs.putInt(HEIGHT, rect.height);
+		
+		prefs.put(FONTSTYLE, this.myMenu.fontStyle);
+		prefs.putInt(FONTSIZE, this.myMenu.fontSize);
+		
+		Color fColor = this.myMenu.fontColor; 
+		fRed = fColor.getRed();
+		fGreen = fColor.getGreen();
+		fBlue = fColor.getBlue();
+		prefs.putInt(FRED, fRed);
+		prefs.putInt(FGREEN, fGreen);
+		prefs.putInt(FBLUE, fBlue);
 		
 		Color color = this.myMenu.getBackground();
 		bgRed = color.getRed();
@@ -57,22 +79,33 @@ public class Clock extends Frame {
         locationY = prefs.getInt(LOCATION_Y, 0);
         width = prefs.getInt(WIDTH, 400);
         height = prefs.getInt(HEIGHT, 100);
-
+        
+        fStyle = prefs.get(FONTSTYLE, "Aharoni");
+        fSize = prefs.getInt(FONTSIZE, 25);
+        
+		fRed = prefs.getInt(FRED, 255);
+		fGreen = prefs.getInt(FGREEN, 255);
+		fBlue = prefs.getInt(FBLUE, 255);
+        
 		bgRed = prefs.getInt(BGRED, 255);
 		bgGreen= prefs.getInt(BGGREEN, 255);
 		bgBlue = prefs.getInt(BGBLUE, 255);
 	}
 	
 	Clock() {
-		super("éûåv");
+		super("clock");
 		super.setSize(width, height);
+		Locale.setDefault(Locale.ENGLISH);
 		
 		prefs = Preferences.userNodeForPackage(this.getClass());
 		load();
 		this.setBounds(locationX, locationY, width, height);
+		this.myMenu.setFontStyle(fStyle);
+		this.myMenu.setFontSize(fSize);
+		this.myMenu.setFontColor(new Color(fRed, fGreen, fBlue));
 		this.myMenu.setBackground(new Color(bgRed, bgGreen, bgBlue));
 		
-		// íËä˙ìIÇ…TimerTask.run()Çé¿çs
+		// ÂÆöÊúüÁöÑ„Å´TimerTask.run()„ÇíÂÆüË°å
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 		
 		setMenuBar(property);
@@ -101,8 +134,8 @@ public class Clock extends Frame {
 		Clock clock;
 		Property(Clock clock){
 			this.clock = clock;
-			mn = new Menu("ÉvÉçÉpÉeÉB");
-			mi = new MenuItem("É_ÉCÉAÉçÉO");
+			mn = new Menu("property");
+			mi = new MenuItem("dialog");
 			mn.addActionListener(this);
 			mi.addActionListener(this);
 			mn.add(mi);
@@ -113,7 +146,7 @@ public class Clock extends Frame {
 			if(e.getSource().equals(mn)){
 				clock.myDialog = new MyDialog(clock);
 			}
-	        if (e.getActionCommand() == "É_ÉCÉAÉçÉO"){
+	        if (e.getActionCommand() == "dialog"){
 	        	clock.myDialog = new MyDialog(clock);
 	        }
 		}
@@ -142,8 +175,9 @@ public class Clock extends Frame {
 		List fontColorList;
 		List backGroundColorList;
 		String[] fs;
-		Font  preFont;
-		Font  font;
+		String  preFontStyle;
+		int preFontSize;
+		Color preFontColor;
 		Color preColor;
 		Button okButton;
 		Button cancelButton;
@@ -151,8 +185,6 @@ public class Clock extends Frame {
 		public MyDialog(Clock owner) {
 			super(owner);
 			this.clock = owner;
-			preFont = clock.myMenu.font;
-			preColor = clock.getBackground();
 			
 			fontList = new List(4, false);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -167,26 +199,26 @@ public class Clock extends Frame {
 			fontSizeList.add("30");
 			
 			backGroundColorList = new List(4, false);
-			backGroundColorList.add("ê‘");
-			backGroundColorList.add("ê¬");
-			backGroundColorList.add("â©");
-			backGroundColorList.add("óŒ");
-			backGroundColorList.add("îí");
-			backGroundColorList.add("çï");
+			backGroundColorList.add("red");
+			backGroundColorList.add("blue");
+			backGroundColorList.add("yellow");
+			backGroundColorList.add("green");
+			backGroundColorList.add("white");
+			backGroundColorList.add("black");
 			
 			fontColorList = new List(4, false);
-			fontColorList.add("ê‘");
-			fontColorList.add("ê¬");
-			fontColorList.add("â©");
-			fontColorList.add("óŒ");
-			fontColorList.add("îí");
-			fontColorList.add("çï");
+			fontColorList.add("red");
+			fontColorList.add("blue");
+			fontColorList.add("yellow");
+			fontColorList.add("green");
+			fontColorList.add("white");
+			fontColorList.add("black");
 			
 			lst1 = new List(4, false);
-			lst1.add("ÉtÉHÉìÉg");
-			lst1.add("ÉtÉHÉìÉgÉTÉCÉY");
-			lst1.add("ï∂éöêF");
-			lst1.add("îwåiêF");
+			lst1.add("font");
+			lst1.add("font size");
+			lst1.add("font color");
+			lst1.add("background color");
 			add(0, 0, 1, 1, lst1, gbl, gbc);
 			
 			okButton = new Button("O.K.");
@@ -199,6 +231,10 @@ public class Clock extends Frame {
      		lst1.addActionListener(this);
      		fontList.addItemListener(this);
      		fontList.addActionListener(this);
+     		fontSizeList.addItemListener(this);
+     		fontSizeList.addActionListener(this);
+     		fontColorList.addItemListener(this);
+     		fontColorList.addActionListener(this);
      		backGroundColorList.addItemListener(this);
      		backGroundColorList.addActionListener(this);
      		
@@ -231,18 +267,13 @@ public class Clock extends Frame {
 
 		public void actionPerformed(ActionEvent e) {		
 			if(e.getSource().equals(okButton)){
-//				if(lst1.getSelectedItem().equals("ÉtÉHÉìÉg")){
-//				}
-//				else if(lst1.getSelectedItem().equals("ÉtÉHÉìÉgÉTÉCÉY")){
-//				}
-//				clock.myMenu.setBackground(Color.BLACK);
 				this.setVisible(false);
 			}
 			if(e.getSource().equals(cancelButton)){
+				clock.myMenu.setFontStyle(preFontStyle);
+				clock.myMenu.setFontSize(preFontSize);
+				clock.myMenu.fontColor = preFontColor;
 				clock.myMenu.setBackground(preColor);
-			}
-			if(e.getSource().equals(backGroundColorList)){
-
 			}
 		}
 
@@ -252,73 +283,68 @@ public class Clock extends Frame {
 				this.remove(fontSizeList);
 				this.remove(fontColorList);
 				this.remove(backGroundColorList);
-				if(lst1.getSelectedItem().equals("ÉtÉHÉìÉg")){
+				if(lst1.getSelectedItem().equals("font")){
 					add(1, 0, 1, 1, fontList, gbl, gbc);
 				}
-				else if(lst1.getSelectedItem().equals("ÉtÉHÉìÉgÉTÉCÉY")){
+				else if(lst1.getSelectedItem().equals("font size")){
 					System.out.println("c");
 					add(1, 0, 1, 1, fontSizeList, gbl, gbc);
 				}
-				else if(lst1.getSelectedItem().equals("ï∂éöêF")){
+				else if(lst1.getSelectedItem().equals("font color")){
 					add(1, 0, 1, 1, fontColorList, gbl, gbc);
 				}
-				else if(lst1.getSelectedItem().equals("îwåiêF")){
+				else if(lst1.getSelectedItem().equals("background color")){
 					add(1, 0, 1, 1, backGroundColorList, gbl, gbc);
 				}
 			}
 			if(e.getSource().equals(fontList)){
-				for(int i = 0; i < fs.length; i++){
-					if(fontList.getSelectedItem().equals(fs[i])){
-						System.out.println("d");
-						
-						Font f = new Font(fs[i], Font.PLAIN, 10);
-						clock.myMenu.setFont(f);
-					}
-				}
+				preFontStyle = clock.myMenu.fontStyle;
+				clock.myMenu.setFontStyle(fontList.getSelectedItem());
 			}
-			else if(e.getSource().equals(fontList)){
-					System.out.println("d");
-					int fontSize = Integer.parseInt(fontSizeList.getSelectedItem());
-					Font f = new Font(fs[22], Font.PLAIN, fontSize);
-					clock.myMenu.setFont(f);
+			else if(e.getSource().equals(fontSizeList)){
+				preFontSize = clock.myMenu.fontSize;
+				clock.myMenu.setFontSize(Integer.parseInt(fontSizeList.getSelectedItem()));
 			}
 			else if(e.getSource().equals(fontColorList)){
-				if(fontColorList.getSelectedItem().equals("ê‘")){
+				preFontColor = clock.myMenu.fontColor;
+				if(fontColorList.getSelectedItem().equals("red")){
 					clock.myMenu.setFontColor(Color.RED);
 				}
-				else if(fontColorList.getSelectedItem().equals("ê¬")){
-					clock.myMenu.setBackground(Color.BLUE);
+				else if(fontColorList.getSelectedItem().equals("blue")){
+					clock.myMenu.setFontColor(Color.BLUE);
 				}
-				else if(fontColorList.getSelectedItem().equals("â©")){
-					clock.myMenu.setBackground(Color.YELLOW);
+				else if(fontColorList.getSelectedItem().equals("yellow")){
+					clock.myMenu.setFontColor(Color.YELLOW);
 				}
-				else if(fontColorList.getSelectedItem().equals("óŒ")){
-					clock.myMenu.setBackground(Color.GREEN);
+				else if(fontColorList.getSelectedItem().equals("green")){
+					clock.myMenu.setFontColor(Color.GREEN);
 				}
-				else if(fontColorList.getSelectedItem().equals("îí")){
-					clock.myMenu.setBackground(Color.WHITE);
+				else if(fontColorList.getSelectedItem().equals("white")){
+					clock.myMenu.setFontColor(Color.WHITE);
 				}
-				else if(fontColorList.getSelectedItem().equals("çï")){
-					clock.myMenu.setBackground(Color.BLACK);
+				else if(fontColorList.getSelectedItem().equals("black")){
+					clock.myMenu.setFontColor(Color.BLACK);
 				}
+				System.out.println(clock.myMenu.fontColor);
 			}
 			else if(e.getSource().equals(backGroundColorList)){
-				if(backGroundColorList.getSelectedItem().equals("ê‘")){
+				preColor = clock.myMenu.getBackground();
+				if(backGroundColorList.getSelectedItem().equals("red")){
 					clock.myMenu.setBackground(Color.RED);
 				}
-				else if(backGroundColorList.getSelectedItem().equals("ê¬")){
+				else if(backGroundColorList.getSelectedItem().equals("blue")){
 					clock.myMenu.setBackground(Color.BLUE);
 				}
-				else if(backGroundColorList.getSelectedItem().equals("â©")){
+				else if(backGroundColorList.getSelectedItem().equals("yellow")){
 					clock.myMenu.setBackground(Color.YELLOW);
 				}
-				else if(backGroundColorList.getSelectedItem().equals("óŒ")){
+				else if(backGroundColorList.getSelectedItem().equals("green")){
 					clock.myMenu.setBackground(Color.GREEN);
 				}
-				else if(backGroundColorList.getSelectedItem().equals("îí")){
+				else if(backGroundColorList.getSelectedItem().equals("white")){
 					clock.myMenu.setBackground(Color.WHITE);
 				}
-				else if(backGroundColorList.getSelectedItem().equals("çï")){
+				else if(backGroundColorList.getSelectedItem().equals("black")){
 					clock.myMenu.setBackground(Color.BLACK);
 				}
 			}
@@ -330,9 +356,10 @@ public class Clock extends Frame {
 	class MyMenuBar extends Panel {
 
 		Font font;
+		String fontStyle = "Aharoni";
 		int fontKind = Font.PLAIN;
 		int fontSize = 25;
-		Color fontColor;
+		Color fontColor = Color.BLACK;;
 
 		int drawPointX = 20;
 		int drawPointY = 20;
@@ -343,21 +370,22 @@ public class Clock extends Frame {
 
 		MyMenuBar(Clock frame) {
 			this.frame = frame;
-			MyTime myTime = new MyTime();
-			font = new Font(myTime.time, fontKind, fontSize);
-			fontColor = Color.BLACK;
+			font = new Font(fontStyle, fontKind, fontSize);
 		}
-
+		
+		public void setFontStyle(String fontStyle) {
+			this.fontStyle = fontStyle;
+			this.font = new Font(fontStyle, fontKind, fontSize);
+		}
+		
 		public void setFontKind(int fontKind) {
-			MyTime myTime = new MyTime();
 			this.fontKind = fontKind;
-			this.font = new Font(myTime.time, fontKind, fontSize);
+			this.font = new Font(fontStyle, fontKind, fontSize);
 		}
 
 		public void setFontSize(int fontSize) {
-			MyTime myTime = new MyTime();
 			this.fontSize = fontSize;
-			this.font = new Font(myTime.time, fontKind, fontSize);
+			this.font = new Font(fontStyle, fontKind, fontSize);
 		}
 
 		public void setFontColor(Color color) {
@@ -368,7 +396,7 @@ public class Clock extends Frame {
 			this.drawPointX = x;
 			this.drawPointY = y;
 		}
-
+		
 		public void paint(Graphics g) {
 			Image bufi = createImage(width, height);
 			Graphics bufg = bufi.getGraphics();
@@ -379,63 +407,10 @@ public class Clock extends Frame {
 			bufg.drawString(myTime.time, drawPointX, drawPointY);
 			g.drawImage(bufi, drawPointX, drawPointY, this);
 		}
-
+		
 		public void update(Graphics g) {
 			paint(g);
 		}
-
-		class ActionAdapter implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-
-				if (e.getActionCommand() == "ïWèÄ") {
-					myMenu.setFontKind(Font.PLAIN);
-				}
-
-				if (e.getActionCommand() == "ëæéö") {
-					myMenu.setFontKind(Font.BOLD);
-				}
-				if (e.getActionCommand() == "ÉCÉ^ÉäÉbÉN") {
-					myMenu.setFontKind(Font.ITALIC);
-				}
-
-				if (e.getActionCommand() == "25") {
-					myMenu.setDrawPoint(20, 20);
-					setSize(400, 100);
-					myMenu.setFontSize(25);
-				}
-
-				if (e.getActionCommand() == "50") {
-					myMenu.setDrawPoint(50, 50);
-					setSize(700, 150);
-					myMenu.setFontSize(50);
-				}
-
-				if (e.getActionCommand() == "75") {
-					myMenu.setDrawPoint(75, 75);
-					setSize(1200, 200);
-					myMenu.setFontSize(100);
-				}
-
-				if (e.getActionCommand() == "çï") {
-					myMenu.setFontColor(Color.BLACK);
-				}
-
-				if (e.getActionCommand() == "îí") {
-					myMenu.setFontColor(Color.WHITE);
-				}
-
-				if (e.getActionCommand() == "ê‘") {
-					setBackGround(Color.RED);
-				}
-				if (e.getActionCommand() == "óŒ") {
-					setBackGround(Color.GREEN);
-				}
-				if (e.getActionCommand() == "â©") {
-					setBackGround(Color.YELLOW);
-				}
-			}
-		}
-
 	}
 
 	class Task extends TimerTask {

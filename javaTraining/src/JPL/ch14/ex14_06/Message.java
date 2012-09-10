@@ -1,11 +1,11 @@
-package JPL.ch14.ex14_6;
+package JPL.ch14.ex14_06;
 
 public class Message extends Thread{
 	
 	boolean condition = false;
 	
 	public synchronized void showMessage(){
-		System.out.println("ƒƒbƒZ[ƒW");
+		System.out.println("ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½W");
 	}
 	
 	public void run(){

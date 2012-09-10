@@ -1,4 +1,4 @@
-package JPL.ch12.ex12_1;
+package JPL.ch12.ex12_01;
 
 public class Vehicle {
 	
@@ -28,7 +28,7 @@ public class Vehicle {
 		nextID++;
 	}
 	
-	//ex2_17’Ç‰Á
+	//ex2_17ï¿½Ç‰ï¿½
 	public void turn(double angle){
 		
 		this.angle = angle;
@@ -36,7 +36,7 @@ public class Vehicle {
 	}
 	
 	public void turn(double angle, String direction){
-		//Œv‚Ü‚í‚è‚ğ³‚Æ‚·‚é
+		//ï¿½ï¿½ï¿½vï¿½Ü‚ï¿½ï¿½ğ³‚Æ‚ï¿½ï¿½ï¿½
 		if(direction.equals(TURN_LEFT)){
 			
 			this.angle += angle;
@@ -51,7 +51,7 @@ public class Vehicle {
 	}
 	//
 	
-	//ex2_15’Ç‰Á
+	//ex2_15ï¿½Ç‰ï¿½
 	public void changeSpeed(double speed){
 		
 		this.speed = speed;
@@ -100,8 +100,8 @@ public class Vehicle {
 	
 	
 	public String toString(){
-		String desc = ownerName + "‚Ì" +"Vehicle" + id + "‚Í"
-				+ angle + "•ûŒü‚É" + "‘¬" + speed + "km‚Å‘–‚Á‚Ä‚¢‚Ü‚·";
+		String desc = ownerName + "ï¿½ï¿½" +"Vehicle" + id + "ï¿½ï¿½"
+				+ angle + "ï¿½ï¿½ï¿½ï¿½" + "ï¿½ï¿½ï¿½ï¿½" + speed + "kmï¿½Å‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½";
 		return desc;
 	}
 

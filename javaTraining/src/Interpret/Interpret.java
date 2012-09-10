@@ -9,32 +9,33 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import Interpret.MyFrame.ClosingWindowListener;
 
 public class Interpret{
+	
+	private static int counter;
 	
 	static MyFrame.Display display;
 	static MyFrame.Display display1;
 	static MyFrame.Display display2;
 	
 	Interpret(MyFrame.Display display, MyFrame.Display display1, MyFrame.Display display2){
-		this.display = display;
-		this.display1 = display1;
-		this.display2 = display2;
+		Interpret.display = display;
+		Interpret.display1 = display1;
+		Interpret.display2 = display2;
 	}
 	
 	static String message = new String();
 	/**
-	 * ƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
+	 * ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
 	 * 
-	 * @param String name ƒNƒ‰ƒX‚Ì–¼‘O
+	 * @param String name ã‚¯ãƒ©ã‚¹ã®åå‰
 	 */
 	public static Class<?> getClass(String name){
 		StringBuffer tempMessage = new StringBuffer(); 
 		Class<?> cls = null;
 		try {
 			cls = Class.forName(name);
-			tempMessage.append("ˆÈ‰º‚ÌƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚ğæ“¾: " + name + "\r\n");
+			tempMessage.append("ä»¥ä¸‹ã®ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—: " + name + "\r\n");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -46,60 +47,62 @@ public class Interpret{
 	}
 	
 	/**
-	 * w’è‚³‚ê‚½ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+	 * æŒ‡å®šã•ã‚ŒãŸã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
 	 * 
-	 * @param Class<?> cls ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚½‚¢ƒNƒ‰ƒX
+	 * @param Class<?> cls ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ãŸã„ã‚¯ãƒ©ã‚¹
 	 */
 	public static Object getInstance(Class<?> cls) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, SecurityException, NoSuchMethodException{
-		message = "ˆÈ‰º‚ÌƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬:" + cls.getName() + "\r\n";
+		message = "ä»¥ä¸‹ã®ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ:" + cls.getName() + "\r\n";
 		display.append(message);
 		return cls.newInstance();
 	}
 	
 	/**
-	 * w’è‚³‚ê‚½ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+	 * æŒ‡å®šã•ã‚ŒãŸã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
 	 * 
-	 * @param Class<?> cls ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚½‚¢ƒNƒ‰ƒX
-	 * @param Object... args ƒCƒ“ƒXƒ^ƒ“ƒX¶¬‚É—p‚¢‚éƒpƒ‰ƒ[ƒ^
+	 * @param Class<?> cls ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ãŸã„ã‚¯ãƒ©ã‚¹
+	 * @param Object... args ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆã«ç”¨ã„ã‚‹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	 */
 	public static Object getInstance(Class<?> cls, Object... args) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, SecurityException, NoSuchMethodException{
-		message = "ˆÈ‰º‚ÌƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬:" + cls.getName() + "\r\n";
+		message = "ä»¥ä¸‹ã®ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ:" + cls.getName() + "\r\n";
 		display.append(message);
 		if(args == null){
 			return cls.newInstance();
 		}
 		else{
 			Class<?>[] argsArray = new Class<?>[args.length];
+			Constructor<?> con = null;
 			for(int i = 0; i < args.length; i++){
+				System.out.println(args[i]);
 				argsArray[i] = getClassObject(args[i]);
 			}
-			Constructor<?> con = cls.getDeclaredConstructor(argsArray);
+			con = cls.getDeclaredConstructor(argsArray);
 			return con.newInstance(args);
 		}
 	}
 	
 	/**
-	 * ƒ†[ƒU‚ªw’è‚µ‚½Œ^‚ÆƒTƒCƒY‚Å”z—ñ‚ğ¶¬‚·‚é
+	 * ãƒ¦ãƒ¼ã‚¶ãŒæŒ‡å®šã—ãŸå‹ã¨ã‚µã‚¤ã‚ºã§é…åˆ—ã‚’ç”Ÿæˆã™ã‚‹
 	 * 
-	 * @param Class<T> type ”z—ñ‚Ì—v‘f‚ÌŒ^
-	 * @param int size ”z—ñ‚ÌƒTƒCƒY
+	 * @param Class<T> type é…åˆ—ã®è¦ç´ ã®å‹
+	 * @param int size é…åˆ—ã®ã‚µã‚¤ã‚º
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T[] toArray(Class<T> type, int size){
-		message = "ˆÈ‰º‚Ì”z—ñ‚ğ¶¬B—v‘fŒ^@" + type.getName() + " " + "ƒTƒCƒY: " + size + "\r\n";
+		message = "ä»¥ä¸‹ã®é…åˆ—ã‚’ç”Ÿæˆã€‚è¦ç´ å‹ã€€" + type.getName() + " " + "ã‚µã‚¤ã‚º: " + size + "\r\n";
 		display.append(message);
 		return  (T[]) Array.newInstance(type, size);
 	}
 	
-	public static void setElement(Object[] oArr, Object value, int index){
+	public static void setElement(Object[] oArr, Object value, int index)throws Throwable{
 		StringBuffer tempMessage = new StringBuffer();
-		tempMessage.append("”z—ñ‚É’l‚ğ‘ã“üB ƒCƒ“ƒfƒbƒNƒX: " + index + " " + "—v‘fŒ^: " + value.getClass().getName() + "\r\n");
+		tempMessage.append("é…åˆ—ã«å€¤ã‚’ä»£å…¥ã€‚ ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹: " + index + " " + "è¦ç´ å‹: " + value.getClass().getName() + "\r\n");
 		int size = oArr.length;
 		if(index >= 0 && index < size){
 			oArr[index] = (Object)value;
 		}
 		else{
-			tempMessage.append("ƒCƒ“ƒfƒbƒNƒX‚ª•s³‚Å‚·\r\n");
+			tempMessage.append("ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒä¸æ­£ã§ã™\r\n");
 		}
 		message = tempMessage.toString();
 		display.append(message);
@@ -110,11 +113,11 @@ public class Interpret{
 	}
 	
 	/**
-	 * ƒIƒuƒWƒFƒNƒg‚ÌƒtƒB[ƒ‹ƒh‚É’l‚ğİ’è‚·‚é
+	 * ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«å€¤ã‚’è¨­å®šã™ã‚‹
 	 * 
-	 * @param Object o ƒtƒB[ƒ‹ƒh‚É’l‚ğİ’è‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg
-	 * @param String fieldName ’l‚ğİ’è‚µ‚½‚¢ƒtƒB[ƒ‹ƒh‚Ì–¼‘O
-	 * @param Object value ƒtƒB[ƒ‹ƒh‚Éİ’è‚µ‚½‚¢’l
+	 * @param Object o ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«å€¤ã‚’è¨­å®šã—ãŸã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	 * @param String fieldName å€¤ã‚’è¨­å®šã—ãŸã„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®åå‰
+	 * @param Object value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«è¨­å®šã—ãŸã„å€¤
 	 */
 	public static void setField(Object o, String fieldName, Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
 		Field field;
@@ -129,11 +132,11 @@ public class Interpret{
 			}
 		}
 		if(field.isAccessible() == false){
-			//privateƒƒ“ƒo‚É‚àƒAƒNƒZƒX‰Â”\‚É‚È‚é
+			//privateãƒ¡ãƒ³ãƒã«ã‚‚ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ã«ãªã‚‹
 			field.setAccessible(true);
 		}
 		field.set(o, value);
-		message = "ƒIƒuƒWƒFƒNƒg"+ o + "‚ÌƒtƒB[ƒ‹ƒh"+ fieldName + "‚É’l"+ value + "‚ğƒZƒbƒg\r\n";
+		message = "ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ"+ o + "ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰"+ fieldName + "ã«å€¤"+ value + "ã‚’ã‚»ãƒƒãƒˆ\r\n";
 		display.append(message);
 	}
 	
@@ -151,79 +154,87 @@ public class Interpret{
 		}
 
 		if(field.isAccessible() == false){
-			//privateƒƒ“ƒo‚É‚àƒAƒNƒZƒX‰Â”\‚É‚È‚é
+			//privateãƒ¡ãƒ³ãƒã«ã‚‚ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ã«ãªã‚‹
 			field.setAccessible(true);
 		}
 		Object value = field.get(o);
-		message = "ƒIƒuƒWƒFƒNƒg"+ o + "‚ÌƒtƒB[ƒ‹ƒh"+ fieldName + ": "+ value + "\r\n";
+		message = "ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ"+ o + "ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰"+ fieldName + ": "+ value + "\r\n";
 		display.append(message);
 		return value;
 	}
 	
+	private static Method getMethod(Object o, Object[] args, String methodName, Class<?>[] argsArray){
+		Method method = null;
+		try {
+			method = o.getClass().getMethod(methodName, argsArray);
+		} catch (NoSuchMethodException e) {
+			try{
+				method = o.getClass().getDeclaredMethod(methodName, argsArray);
+			}catch (NoSuchMethodException e2) {
+				for(int i = 0; i < args.length; i++){
+					//å¼•æ•°ãŒã²ã¨ã¤ã§ã‚ã‚Œã°å¤§ä¸ˆå¤«ã€‚å¼•æ•°ãŒè¤‡æ•°ã®å ´åˆã¯ã»ã¼ç„¡ç†ã€‚ä¸€æ‹¬ã§å¼•æ•°ã™ã¹ã¦ã®ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹å–å¾—ã™ã‚‹ã®ã§ã€‚
+					if(args[i].getClass().getSuperclass() != null){//primitive, interface, Objectã§ã‚ã‚Œã°ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã¯null
+							argsArray[i] = args[i].getClass().getSuperclass();
+					}
+					else{//ã™ã¹ã¦ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã«ã¤ã„ã¦ãŸã‚ã™ã€‚j=0...,ãã®å¾Œã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ 
+//						if(args[i].getClass().getInterfaces() != null){
+//							Class<?>[] icls = args[i].getClass().getInterfaces();
+//							for(int j = 0; j < icls.length; j++){
+//								argsArray[i] = icls[j];
+//							}
+//						}
+					}
+					counter++;
+					if(counter == 5){
+						message = "NoSuchMethodException\r\n";
+						display.append(message);
+						return null;
+					}
+					method = getMethod(o, args, methodName, argsArray);
+				}
+			}
+		}
+		return method;
+	}
+	
 	/**
-	 * ƒIƒuƒWƒFƒNƒg‚Ìƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·
+	 * ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™
 	 * 
-	 * @param Object o ƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg
-	 * @param String methodName ŒÄ‚Ño‚µ‚½‚¢ƒƒ\ƒbƒh‚Ì–¼‘O
-	 * @param Object... args ƒƒ\ƒbƒh‚Ìƒpƒ‰ƒ[ƒ^
+	 * @param Object o ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ãŸã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	 * @param String methodName å‘¼ã³å‡ºã—ãŸã„ãƒ¡ã‚½ãƒƒãƒ‰ã®åå‰
+	 * @param Object... args ãƒ¡ã‚½ãƒƒãƒ‰ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	 * @throws NoSuchMethodException 
 	 * 
 	 */
 	public static Object invoke(Object o, String methodName, Object... args) throws SecurityException, ClassNotFoundException, NoSuchMethodException{
 		StringBuffer tempMessage = new StringBuffer();
 		Method method = null;
-		if(args == null){
-			try {
-				method = o.getClass().getMethod(methodName, null);
-			} catch (NoSuchMethodException e) {
-				try {
-					method = o.getClass().getSuperclass().getMethod(methodName, null);
-				} catch (NoSuchMethodException e1) {
-					e1.printStackTrace();
-					try{
-						method = o.getClass().getDeclaredMethod(methodName, null);
-					}catch(NoSuchMethodException e2){
-						try{
-							method = o.getClass().getSuperclass().getDeclaredMethod(methodName, null);
-						}catch(NoSuchMethodException e3){
-							e3.printStackTrace();
-							message = "NoSuchMethodException\r\n";
-							display.append(message);
-						}
-					}
-				}
-			}
+
+//		//argsArray:ãƒ¡ã‚½ãƒƒãƒ‰ã®å¼•æ•°ã®å‹é…åˆ—
+//		Class<?>[] argsArray = new Class<?>[args.length];
+//		for(int i = 0; i < args.length; i++){
+//			argsArray[i] = getClassObject(args[i]);
+//			//ã‚¹ãƒ¼ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã‚’å¼•æ•°ã«ã¨ã‚Œã‚‹ã‚ˆã†ã«ä¿®æ­£
+//		}
+//		try {
+//			method = o.getClass().getMethod(methodName, argsArray);
+//		} catch (NoSuchMethodException e) {
+//			try{
+//				method = o.getClass().getDeclaredMethod(methodName, argsArray);
+//			}catch (NoSuchMethodException e2) {
+//					message = "NoSuchMethodException\r\n";
+//					display.append(message);
+//			}
+//		}
+		/////////////////////////////////////////
+		//argsArray:ãƒ¡ã‚½ãƒƒãƒ‰ã®å¼•æ•°ã®å‹é…åˆ—
+		Class<?>[] argsArray = new Class<?>[args.length];
+		for(int i = 0; i < args.length; i++){
+			argsArray[i] = getClassObject(args[i]);
 		}
-		else{
-			//argsArray:ƒƒ\ƒbƒh‚Ìˆø”‚ÌŒ^”z—ñ
-			Class<?>[] argsArray = new Class<?>[args.length];
-			for(int i = 0; i < args.length; i++){
-				argsArray[i] = getClassObject(args[i]);
-				//ƒX[ƒp[ƒNƒ‰ƒX‚ğˆø”‚É‚Æ‚ê‚é‚æ‚¤‚ÉC³
-//				argsArray[i] = getClassObject(args[i]).getSuperclass();
-			}
-			try {
-				method = o.getClass().getMethod(methodName, argsArray);
-			} catch (NoSuchMethodException e) {
-				try {
-					method = o.getClass().getSuperclass().getMethod(methodName, argsArray);
-				} catch (NoSuchMethodException e1) {
-					try{
-						method = o.getClass().getDeclaredMethod(methodName, argsArray);
-					}catch (NoSuchMethodException e2) {
-						try{
-							method = o.getClass().getSuperclass().getDeclaredMethod(methodName, argsArray);
-						}
-						catch(NoSuchMethodException e3){
-							e3.printStackTrace();
-							message = "NoSuchMethodException\r\n";
-							display.append(message);
-						}
-					}
-				}
-			}
-		}
+		method = getMethod(o, args, methodName, argsArray);
 		
+		////////////////////////////////////////
 		tempMessage.append("method: " + method.getName() + " is called.\r\n");
 		
 		if(Modifier.isPrivate(method.getModifiers())){
@@ -239,7 +250,7 @@ public class Interpret{
 			Type returnType = method.getGenericReturnType();
 			tempMessage.append("return type: " + returnType.toString() + "\r\n");
 			if(returnType.equals(Void.TYPE)){
-				tempMessage.append("return value: " + "‚È‚µ\r\n");
+				tempMessage.append("return value: " + "ãªã—\r\n");
 			}else{
 				tempMessage.append("return value: " + method.invoke(o, args).toString() + "\r\n");
 			}
@@ -262,104 +273,12 @@ public class Interpret{
 		}
 		return null;
 	}
-	
-	/**
-	 * ƒIƒuƒWƒFƒNƒg‚Ìƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·
-	 * 
-	 * @param Object o ƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg
-	 * @param String methodName ŒÄ‚Ño‚µ‚½‚¢ƒƒ\ƒbƒh‚Ì–¼‘O
-	 * @param String... args ƒ†[ƒU‚ª•¶š—ñ‚Åw’è‚·‚éƒƒ\ƒbƒh‚Ìƒpƒ‰ƒ[ƒ^
-	 * @throws NoSuchMethodException 
-	 * 
-	 */
-	public static Object invoke(Object o, String methodName, String... args) throws SecurityException, ClassNotFoundException, NoSuchMethodException{
-		StringBuffer tempMessage = new StringBuffer();
-		Method method = null;
-		Object[] realArgs = null;
-		Class<?>[] argsArray = null;
-		Type[] parameterType = new Type[args.length];
-		
-		if(args == null){
-			try {
-				method = o.getClass().getDeclaredMethod(methodName, null);
-			} catch (NoSuchMethodException e) {
-				try {
-					method = o.getClass().getSuperclass().getDeclaredMethod(methodName, null);
-				} catch (NoSuchMethodException e1) {
-					e1.printStackTrace();
-					message = "NoSuchMethodException\r\n";
-					display.append(message);
-				}
-			}
-		}
-		else{
-			//argsArray:ƒƒ\ƒbƒh‚Ìˆø”‚ÌŒ^”z—ñ
-			argsArray = new Class<?>[args.length];
-			for(int i = 0; i < args.length; i++){
-				argsArray[i] = getClassObject(args[i]);
-			}
-			try {
-				method = o.getClass().getDeclaredMethod(methodName, argsArray);
-				tempMessage.append("ˆÈ‰º‚ÌƒNƒ‰ƒX‚©‚çƒƒ\ƒbƒh‚ğæ“¾: "+ o.getClass().toString() + "\r\n");
-			} catch (NoSuchMethodException e) {
-				try {
-					tempMessage.append("ˆÈ‰º‚ÌƒNƒ‰ƒX‚©‚çƒƒ\ƒbƒh‚ğæ“¾: "+ o.getClass().getSuperclass().toString() + "\r\n");
-					method = o.getClass().getSuperclass().getDeclaredMethod(methodName, argsArray);
-				} catch (NoSuchMethodException e1) {
-					e1.printStackTrace();
-					message = tempMessage.toString() + "NoSuchMethodException\r\n";
-					display.append(message);
-				}
-			}
-		}
-		tempMessage.append("method: " + method.getName() + " is called.\r\n");
-		
-		if(Modifier.isPrivate(method.getModifiers())){
-			method.setAccessible(true);
-		}
-		if(o.equals(null)){
-			if(Modifier.isStatic(method.getModifiers()) == false){
-				throw new NoSuchMethodException();
-			}
-		}
-		
-		try {
-			parameterType = method.getGenericParameterTypes();
-			//ƒ†[ƒUw’è‚ÌStringƒpƒ‰ƒ[ƒ^‚ğŒÄ‚Ñ‚½‚¢ƒƒ\ƒbƒh‚Ìˆø”‚ÌŒ^‚É•ÏŠ·‚µ‚ÄObjectŒ^”z—ñ‚ÉŠi”[
-			realArgs = stringToObject(args, parameterType);
-			
-			Type returnType = method.getGenericReturnType();
-			tempMessage.append("return type: " + returnType.toString() + "\r\n");
-			
-			if(returnType.equals(Void.TYPE)){
-				tempMessage.append("return value: " + "‚È‚µ\r\n");
-			}else{
-				tempMessage.append("return value: " + method.invoke(o, realArgs).toString() + "\r\n");
-			}
-			
-			message = tempMessage.toString();
-			display.append(message);
-			return method.invoke(o, realArgs);
-			
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			message = tempMessage.toString() + "IllegalArgumentException\r\n";
-			display.append(message);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			message = tempMessage.toString() + "IllegalAccessException\r\n";
-			display.append(message);
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-			tempMessage.append("InvocationTargetException\r\n");
-			message = tempMessage.toString() + e.getCause().toString() + "\r\n";
-			display.append(message);
-		}
-		return null;
-	}
-	
+
 	private static Class<?> getClassObject(Object o) throws ClassNotFoundException{
-		//Šî–{ƒf[ƒ^Œ^‚Ìê‡
+		if(o == null){
+			System.out.println("null");
+		}
+		//åŸºæœ¬ãƒ‡ãƒ¼ã‚¿å‹ã®å ´åˆ
 		if(o instanceof Boolean){
 			return boolean.class;
 		}
@@ -384,8 +303,9 @@ public class Interpret{
 		else if(o instanceof Float){
 			return float.class;
 		}
-		//Šî–{ƒf[ƒ^Œ^ˆÈŠO‚Ìê‡:forName()‚ÅƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚ğæ“¾
+		//åŸºæœ¬ãƒ‡ãƒ¼ã‚¿å‹ä»¥å¤–ã®å ´åˆ:forName()ã§ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
 		else{
+			System.out.println(Class.forName(strip(o.getClass().toString(), "class ")));
 			return Class.forName(strip(o.getClass().toString(), "class "));
 		}
 		
@@ -396,7 +316,7 @@ public class Interpret{
 		Object[] oArr = new Object[str.length];
 		
 		for(int i = 0; i < oArr.length; i++){
-			//Šî–{ƒf[ƒ^Œ^‚Ìê‡
+			//åŸºæœ¬ãƒ‡ãƒ¼ã‚¿å‹ã®å ´åˆ
 			System.out.println("type: "+type[i].toString());
 			if(type[i].equals(String.class)||type[i].equals(String.class.getSuperclass())){
 				oArr[i] = str[i];
@@ -425,25 +345,25 @@ public class Interpret{
 			else if(type[i].equals(Float.TYPE)){
 				oArr[i] = Float.parseFloat(str[i]);
 			}
-			//Šî–{ƒf[ƒ^Œ^ˆÈŠO‚Ìê‡:forName()‚ÅƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚ğæ“¾
+			//åŸºæœ¬ãƒ‡ãƒ¼ã‚¿å‹ä»¥å¤–ã®å ´åˆ:forName()ã§ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
 			else{
 //				return Class.forName(strip(o.getClass().toString(), "class "));
-				System.out.println("Šî–{ƒf[ƒ^Œ^");
+				System.out.println("åŸºæœ¬ãƒ‡ãƒ¼ã‚¿å‹");
 			}
 		}
 		return oArr;
 	}
 	
 	/**
-	 * ‚·‚×‚Ä‚Ìƒƒ“ƒo‚ğ•\¦‚·‚é
+	 * ã™ã¹ã¦ã®ãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã™ã‚‹
 	 * 
-	 * @param Class<?> c ƒƒ“ƒo‚ğ•\¦‚µ‚½‚¢ƒNƒ‰ƒXŒ^ƒIƒuƒWƒFƒNƒg
+	 * @param Class<?> c ãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã—ãŸã„ã‚¯ãƒ©ã‚¹å‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	 */
 	public static void printAllMembers(Class<?> c){
-		System.out.println("ƒNƒ‰ƒX: ");
+		System.out.println("ã‚¯ãƒ©ã‚¹: ");
 		System.out.println(c);
 		
-		System.out.println("ƒtƒB[ƒ‹ƒh: ");
+		System.out.println("ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰: ");
 		Field[] declaredfields = c.getDeclaredFields();
 		Field[] fields = c.getFields();
 		ArrayList<Field> fieldList = new ArrayList<Field>(fields.length); 
@@ -461,7 +381,7 @@ public class Interpret{
 		}
 		printMembers(allFields);
 		
-		System.out.println("ƒRƒ“ƒXƒgƒ‰ƒNƒ^: ");
+		System.out.println("ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿: ");
 		Constructor[] declaredconstructors = c.getDeclaredConstructors();
 		Constructor[] constructors = c.getConstructors();
 		ArrayList<Constructor> constructorList = new ArrayList<Constructor>(constructors.length); 
@@ -479,7 +399,7 @@ public class Interpret{
 		}
 		printMembers(allConstructors);
 		
-		System.out.println("ƒƒ\ƒbƒh: ");
+		System.out.println("ãƒ¡ã‚½ãƒƒãƒ‰: ");
 		Method[] declaredmethods = c.getDeclaredMethods();
 		Method[] methods = c.getMethods();
 		ArrayList<Method> methodList = new ArrayList<Method>(methods.length); 
@@ -499,7 +419,7 @@ public class Interpret{
 	}
 	
 	public static void printFields(Class<?> c){
-		System.out.println("ƒtƒB[ƒ‹ƒh: ");
+		display2.append("ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰\r\n");
 		Field[] declaredfields = c.getDeclaredFields();
 		Field[] fields = c.getFields();
 		ArrayList<Field> fieldList = new ArrayList<Field>(fields.length); 
@@ -519,7 +439,7 @@ public class Interpret{
 	}
 	
 	public static void printConstructors(Class<?> c){
-		System.out.println("ƒRƒ“ƒXƒgƒ‰ƒNƒ^: ");
+		display2.append("ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿\r\n");
 		Constructor[] declaredconstructors = c.getDeclaredConstructors();
 		Constructor[] constructors = c.getConstructors();
 		ArrayList<Constructor> constructorList = new ArrayList<Constructor>(constructors.length); 
@@ -539,7 +459,7 @@ public class Interpret{
 	}
 	
 	public static void printMethods(Class<?> c){
-		System.out.println("ƒƒ\ƒbƒh: ");
+		display2.append("ãƒ¡ã‚½ãƒƒãƒ‰\r\n");
 		Method[] declaredmethods = c.getDeclaredMethods();
 		Method[] methods = c.getMethods();
 		ArrayList<Method> methodList = new ArrayList<Method>(methods.length); 
@@ -559,10 +479,10 @@ public class Interpret{
 	}
 	
 	/**
-	 * ‚·‚×‚Ä‚Ìƒƒ“ƒo‚ğ•\¦‚·‚é
+	 * ã™ã¹ã¦ã®ãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã™ã‚‹
 	 * 
-	 * @param Class<?> c ƒƒ“ƒo‚ğ•\¦‚µ‚½‚¢ƒNƒ‰ƒXŒ^ƒIƒuƒWƒFƒNƒg
-	 * @param String stripped •\¦‚ğÈ—ª‚µ‚½‚¢•¶š—ñ
+	 * @param Class<?> c ãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã—ãŸã„ã‚¯ãƒ©ã‚¹å‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	 * @param String stripped è¡¨ç¤ºã‚’çœç•¥ã—ãŸã„æ–‡å­—åˆ—
 	 */
 	public static void printAllMembers(Class<?> c, String stripped){
 		System.out.println(c);
@@ -571,36 +491,37 @@ public class Interpret{
 		printMembers(c.getDeclaredMethods(), stripped);
 	}
 	/**
-	 * w’è‚³‚ê‚½ƒƒ“ƒo‚ğ•\¦‚·‚é
+	 * æŒ‡å®šã•ã‚ŒãŸãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã™ã‚‹
 	 * 
-	 * @param Member[] mems •\¦‚µ‚½‚¢ƒƒ“ƒoŒ^ƒIƒuƒWƒFƒNƒg
+	 * @param Member[] mems è¡¨ç¤ºã—ãŸã„ãƒ¡ãƒ³ãƒå‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	 */
 	public static void printMembers(Member[] mems){
 		for(Member m : mems){
-			if(m.getDeclaringClass() == Object.class){
-				continue;
-			}
+//			if(m.getDeclaringClass() == Object.class){
+//				continue;
+//			}
 			String decl = m.toString() + "\r\n";
 			display2.append(decl);
 		}
+		display2.append("\r\n");
 	}
 	/**
-	 * w’è‚³‚ê‚½ƒƒ“ƒo‚ğ•\¦‚·‚é
+	 * æŒ‡å®šã•ã‚ŒãŸãƒ¡ãƒ³ãƒã‚’è¡¨ç¤ºã™ã‚‹
 	 * 
-	 * @param Member[] mems •\¦‚µ‚½‚¢ƒƒ“ƒoŒ^ƒIƒuƒWƒFƒNƒg
-	 * @param String stripped •\¦‚ğÈ—ª‚µ‚½‚¢•¶š—ñ
+	 * @param Member[] mems è¡¨ç¤ºã—ãŸã„ãƒ¡ãƒ³ãƒå‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	 * @param String stripped è¡¨ç¤ºã‚’çœç•¥ã—ãŸã„æ–‡å­—åˆ—
 	 */
 	public static void printMembers(Member[] mems, String stripped){
 		for(Member m : mems){
-			if(m.getDeclaringClass() == Object.class){
-				continue;
-			}
+//			if(m.getDeclaringClass() == Object.class){
+//				continue;
+//			}
 			String decl = m.toString() + "\r\n";
 			display2.append(strip(decl, stripped));
 		}
 	}
 	
-	private static String strip(String str, String clearedStr){
+	static String strip(String str, String clearedStr){
 		if(str.contains(clearedStr)){
 			return str.replace(clearedStr, "");
 		}
@@ -634,7 +555,7 @@ public class Interpret{
 		
 		Object[] oList = toArray(Object.class, 100);
 		oList[0] = getInstance(cls, "rafa");
-		ArrayList arr = new ArrayList();
+		ArrayList<Object> arr = new ArrayList<Object>();
 		arr.add(oList[0]);
 		System.out.println("0."+arr.get(0).getClass().getSuperclass().toString());
 		System.out.println("1."+cls.getSuperclass().toString());

@@ -1,10 +1,9 @@
-package JPL.ch16.ex16_5;
+package JPL.ch16.ex16_05;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
-import JPL.ch16.ex16_2.TypeDesc;
-import JPL.ch16.ex16_4.BugsFixed;
+import JPL.ch16.ex16_02.TypeDesc;
 
 public class ClassContents {
 	

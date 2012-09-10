@@ -1,4 +1,4 @@
-package JPL.ch13.ex13_3;
+package JPL.ch13.ex13_03;
 
 public class MyString {
 		
@@ -16,7 +16,7 @@ public class MyString {
 	}
 	
 	public static String[] delimitedStringArray(String from, char start, char end){
-		//Œ‹‰Ê‚ğŠi”[‚·‚é”z—ñ‚Ì¶¬B—e—Ê‚ÍŠÜ‚Ü‚ê‚éstart‚Ì”‚æ‚è‘½‚­‚Í‚È‚ç‚È‚¢B
+		//ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½Bï¿½eï¿½Ê‚ÍŠÜ‚Ü‚ï¿½ï¿½startï¿½Ìï¿½ï¿½ï¿½è‘½ï¿½ï¿½ï¿½Í‚È‚ï¿½È‚ï¿½ï¿½B
 		final int maxOfResultSize = countIncludedChar(from, start);
 		String[] temporaryResult = new String[maxOfResultSize];
 		
@@ -31,7 +31,7 @@ public class MyString {
 			endPos = testedString.indexOf(end);
 			if(str != null){
 				temporaryResult[index] = str;	
-				testedString = testedString.substring(endPos+1);//Œ³‚Ì•¶š—ñ‚©‚çstart,end‚ÅˆÍ‚Ü‚ê‚½•¶š—ñ‚ğœ‚¢‚ÄŸ‰ñŒŸ¸‚·‚é•¶š—ñ‚ğ¶¬B
+				testedString = testedString.substring(endPos+1);//ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½ñ‚©‚ï¿½start,endï¿½ÅˆÍ‚Ü‚ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½ñŒŸï¿½ï¿½ï¿½ï¿½é•¶ï¿½ï¿½ï¿½ï¿½ğ¶ï¿½ï¿½B
 				resultSize++;
 			}
 			else
@@ -39,7 +39,7 @@ public class MyString {
 			index++;
 		}
 		
-		//’†g‚ª‚ ‚é—v‘f‚¾‚¯Ši”[
+		//ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½iï¿½[
 		String[] result = new String[resultSize];
 		for(int i = 0; i < result.length; i++){
 			result[i] = temporaryResult[i];
@@ -49,7 +49,7 @@ public class MyString {
 	
 	public static int countIncludedChar(CharSequence charseq, char searchedChar){
 		if(charseq == null){
-			System.out.println("—LŒø‚È’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+			System.out.println("ï¿½Lï¿½ï¿½È’lï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		String testedStr = charseq.toString();
@@ -66,7 +66,7 @@ public class MyString {
 	
 	public static int countIncludedString(CharSequence charseq, String str){
 		if(charseq == null || str == null){
-			System.out.println("—LŒø‚È’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+			System.out.println("ï¿½Lï¿½ï¿½È’lï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		String testedStr = charseq.toString();
@@ -81,9 +81,9 @@ public class MyString {
 	}
 	
 	public static void main(String[] args) {
-		String[] strs = delimitedStringArray("aa<Hello><a>cc<bb>", '<', '>');
+		String[] strs = delimitedStringArray("<aa><bb><Hello>", '<', '>');
 		for(int i = 0; i < strs.length; i++){
-			System.out.println("æ“¾‚µ‚½•¶š—ñ"+i+":"+strs[i]);
+			System.out.println("array"+i+":"+strs[i]);
 		}
 	}
 

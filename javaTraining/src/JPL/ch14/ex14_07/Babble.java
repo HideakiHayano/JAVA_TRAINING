@@ -1,6 +1,6 @@
-package JPL.ch14.ex14_7;
+package JPL.ch14.ex14_07;
 
-//yield()‚ÅƒXƒŒƒbƒh‚Ì—Dæ‡ˆÊ‚ðŒˆ‚ß‚éBƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŽÀs‚Ì‚½‚Ñ‚ÉƒXƒŒƒbƒh‚ÌŽÀs‡‚ÍˆÙ‚È‚éB
+//yield()ï¿½ÅƒXï¿½ï¿½ï¿½bï¿½hï¿½Ì—Dï¿½æ‡ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ß‚ï¿½Bï¿½Aï¿½vï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½Ì‚ï¿½ï¿½Ñ‚ÉƒXï¿½ï¿½ï¿½bï¿½hï¿½ÌŽï¿½ï¿½sï¿½ï¿½ï¿½ÍˆÙ‚È‚ï¿½B
 
 public class Babble extends Thread{
 	

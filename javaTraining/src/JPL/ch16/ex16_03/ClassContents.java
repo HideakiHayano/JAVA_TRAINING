@@ -1,10 +1,10 @@
-package JPL.ch16.ex16_3;
+package JPL.ch16.ex16_03;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 
-import JPL.ch16.ex16_2.TypeDesc;
-import JPL.ch3.ex3_9.Vehicle;
+import JPL.ch16.ex16_02.TypeDesc;
+import JPL.ch03.ex03_09.Vehicle;
 
 public class ClassContents {
 	
@@ -36,6 +36,7 @@ public class ClassContents {
 	}
 	
 	public static void main(String[] args) {
+		//Please input the value of "String[] args" from the settings of Java application.
 		Class<?> c;
 		ArrayList classList = null;
 		try {

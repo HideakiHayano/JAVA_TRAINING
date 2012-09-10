@@ -1,4 +1,4 @@
-package JPL.ch11.ex11_2;
+package JPL.ch11.ex11_02;
 
 public class Attr<E> {
 
@@ -37,7 +37,7 @@ public class Attr<E> {
 		Attr<String> attr = new Attr<String>("score", "100");
 		System.out.println(attr.getName() + ":" + attr.getValue());
 		
-		//String‚µ‚©ˆø”‚É‚Æ‚ç‚È‚¢‚Ì‚ÅƒRƒ“ƒpƒCƒ‹ƒGƒ‰[
+		//Stringï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚Æ‚ï¿½È‚ï¿½ï¿½Ì‚ÅƒRï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½[
 		//attr.setValue(5);
 	}
 
