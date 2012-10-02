@@ -132,7 +132,7 @@ public class MyFrame extends Frame{
 		}
 	}
 	
-	class MyTime{
+	public class MyTime{
 		String time;
 		
 		MyTime(){

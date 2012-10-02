@@ -1,0 +1,6 @@
+power=10
+control=10
+spin=10
+power+5
+control+3
+spin+6

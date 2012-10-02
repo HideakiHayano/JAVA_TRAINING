@@ -1,0 +1,5 @@
+I checked things below referring to WeakHashMap class. 
+
+・The values contained in a "WeakValueMap" object possibly return "null" even after the method "hasNext"
+returns "true".
+・The values might be removed by GC even while they are being checked through iterator. 
