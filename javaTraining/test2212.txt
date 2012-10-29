@@ -1,0 +1,5 @@
+#Racket performance
+name=racket1
+power=7
+control=10
+spin=9

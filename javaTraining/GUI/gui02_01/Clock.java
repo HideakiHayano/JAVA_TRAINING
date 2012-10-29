@@ -1,7 +1,8 @@
 package gui02_01;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
