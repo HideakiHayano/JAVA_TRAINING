@@ -58,6 +58,7 @@ public final class ResourceManager {
 	}
 	
 	private class ResourceImpl implements Resource{
+		//Completely wrong. Use SoftRefernce or WeakRefernce to manage the key.
 		
 		boolean needsRelease = false;
 		

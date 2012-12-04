@@ -26,6 +26,8 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JFrame;
+
 public class MyFrame extends Frame{
 	int width = 400;
 	int height = 100;
@@ -42,7 +44,7 @@ public class MyFrame extends Frame{
 	    timer.scheduleAtFixedRate(timerTask, 0, 1000);
 	  
 	    add(myMenu);
-		
+	    
 		addWindowListener(new ClosingWindowListener());
 		setUndecorated(true);
 		addMouseMotionListener((MouseMotionListener) new MouseAdapter(this));

@@ -10,12 +10,12 @@ public class DataHandler {
 	
 	private WeakReference<File> lastFile; 
 	private WeakReference<byte[]> lastData;
-	
+	//If the result of "lastFile.get()" is not linked to a strong reference, GC may delete it in the process of running the program. 
 	byte[] readFile(File file) throws IOException{
 		byte[] data;
 		
 		//Check if the data is kept
-		if(file.equals(lastFile.get())){
+		if(file.equals(lastFile.get())){//Does not work because lastFile == null.
 			data = lastData.get();
 			if(data != null){
 				return data;

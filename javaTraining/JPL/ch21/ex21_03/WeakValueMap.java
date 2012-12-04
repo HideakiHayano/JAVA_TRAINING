@@ -21,7 +21,7 @@ public class WeakValueMap {
 	}
 	
 	public Object get(Object key){
-		return map.get(key);	
+		return map.get(key).get();	
 	}
 	
 }

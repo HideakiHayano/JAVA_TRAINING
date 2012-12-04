@@ -25,6 +25,7 @@ public class TranslateByteFilter extends FilterReader{
 		StringReader src = new StringReader("aaa");
 		TranslateByteFilter tl = new TranslateByteFilter(src);
 		int c;
+		//Convert 'a' to 'e'.
 		while((c = tl.read((byte)'a', (byte)'e')) != -1){
 			System.out.println((char)c);
 		}

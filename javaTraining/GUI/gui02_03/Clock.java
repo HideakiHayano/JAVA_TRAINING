@@ -1,4 +1,4 @@
-package gui02_02;
+package gui02_03;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,26 +12,26 @@ import java.util.prefs.Preferences;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JEditorPane;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JWindow;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class Clock extends JFrame {
+public class Clock extends JWindow {
 	int width = 400;
 	int height = 100;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM/d (EEE) HH:mm:ss");
 	Timer timer = new Timer();
 	TimerTask timerTask = new Task();
 	MyPanel myMenu = new MyPanel(this);
-	MyDialog myDialog;
-	Property property = new Property(this);
 	
 	int bgRed;
 	int bgGreen;
@@ -106,7 +106,6 @@ public class Clock extends JFrame {
 	}
 	
 	Clock() {
-		super("clock");
 		super.setSize(width, height);
 		Locale.setDefault(Locale.ENGLISH);
 		
@@ -121,14 +120,68 @@ public class Clock extends JFrame {
 		// 定期的にTimerTask.run()を実行
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 		
-		setMenuBar(property);
+		//setMenuBar(property);
 		add(myMenu);
 		
 		addWindowListener(new ClosingWindowListener());
+		addMouseMotionListener((MouseMotionListener) new MouseAdapter(this, myMenu));
+		addMouseListener(new MouseAdapter(this, myMenu));
 		super.setVisible(true);
 
 	}
+	
+	class MouseAdapter implements MouseListener, MouseMotionListener{
+		Clock clock;
+		MyPanel panel;
+		int startX;
+		int startY;
+		Point loc;
+		
+		public MouseAdapter(Clock clock, MyPanel panel){
+			this.clock = clock;
+			this.panel = panel;
+		}
+		
+		public void mouseDragged(MouseEvent e) {
+			loc = clock.getLocation(loc);
+			int x = loc.x + e.getX() - startX;
+			int y = loc.y  + e.getY() - startY;
+			clock.setLocation(x, y);
+		}
+	
+		public void mouseMoved(MouseEvent e) {
 
+		}
+
+		public void mouseClicked(MouseEvent e) {
+
+		}
+
+		public void mousePressed(MouseEvent e) {
+		    if ((e.getModifiers() & java.awt.event.MouseEvent.BUTTON1_MASK) != 0) {
+		    	this.startX = e.getX();
+		    	this.startY = e.getY();
+		    	System.out.println(startX);
+		    	System.out.println(startY);
+		    }
+		    else if ((e.getModifiers() & java.awt.event.MouseEvent.BUTTON3_MASK) != 0) {
+		    	panel.popup.show(panel, e.getX(), e.getY());
+		    }
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+	}
+	
 	public static void main(String[] args) {
 		new Clock();
 	}
@@ -139,30 +192,6 @@ public class Clock extends JFrame {
 
 	public void setSize(int w, int h) {
 		super.setSize(w, h);
-	}
-	
-	class Property extends MenuBar implements ActionListener{
-		Menu mn;
-		MenuItem mi;
-		Clock clock;
-		Property(Clock clock){
-			this.clock = clock;
-			mn = new Menu("property");
-			mi = new MenuItem("dialog");
-			mn.addActionListener(this);
-			mi.addActionListener(this);
-			mn.add(mi);
-			add(mn);
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(mn)){
-				clock.myDialog = new MyDialog(clock);
-			}
-	        if (e.getActionCommand() == "dialog"){
-	        	clock.myDialog = new MyDialog(clock);
-	        }
-		}
 	}
 
 	class MyTime {
@@ -176,145 +205,10 @@ public class Clock extends JFrame {
 			time = sdf.format(date.getTime());
 		}
 	}
-
-	class MyDialog extends JDialog implements ListSelectionListener, ActionListener, ChangeListener{
-		Clock clock;
-		MyPanel myMenu;
-		GridBagLayout gbl = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		JList lst1;
-		JList fontList;
-		JList fontSizeList;
-
-		String[] menuStr = {"font","font size","font color","background color"};
-		String[] fs;
-		String[] fontSizeStr = {"20","30","40","50"};
-		String  preFontStyle;
-		int preFontKind;
-		int preFontSize;
-		Color preFontColor;
-		Color preBgColor;
-		JButton okButton;
-		JButton cancelButton;
-		JColorChooser colorChooser;
-		JScrollPane scroll;
-		JPanel listPanel;
-		
-		public MyDialog(Clock owner) {
-			super(owner);
-			this.clock = owner;
-			
-			preFontStyle = clock.myMenu.getFontStyle();
-			preFontKind = clock.myMenu.getFontKind();
-			preFontSize = clock.myMenu.getFontSize();
-			preFontColor = clock.myMenu.getFontColor();
-			preBgColor = clock.myMenu.getBackGroundColor();
-			
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			fs = ge.getAvailableFontFamilyNames();
-			
-			fontList = new JList(fs);
-			fontList.setVisibleRowCount(4);
-			fontSizeList = new JList(fontSizeStr);
-			
-			lst1 = new JList(menuStr);
-
-			add(0, 0, 1, 1, lst1, gbl, gbc);
-			
-			okButton = new JButton("O.K.");
-			cancelButton = new JButton("Cancel");
-			
-			add(2, 4, 1, 1, okButton, gbl, gbc);
-			add(3, 4, 1, 1, cancelButton, gbl, gbc);
-
-			lst1.addListSelectionListener(this);
-     		fontList.addListSelectionListener(this);
-     		fontSizeList.addListSelectionListener(this);
-     		
-			okButton.addActionListener(this);
-			cancelButton.addActionListener(this);
-			
-			addWindowListener(new ClosingWindowListener());
-			
-			setLayout(gbl);
-			setSize(400, 150);
-			setResizable(false);
-			setVisible(true);
-		}
-
-		private void add(int x, int y, int w, int h, Component o,
-			GridBagLayout gb, GridBagConstraints gc) {
-			gc.gridx = x;
-			gc.gridy = y;
-			gc.gridwidth = w;
-			gc.gridheight = h;
-			gb.setConstraints(o, gc);
-			add(o);
-		}
-
-		class ClosingWindowListener extends WindowAdapter {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		}
-
-		public void actionPerformed(ActionEvent e) {		
-			if(e.getSource().equals(okButton)){
-				this.setVisible(false);
-			}
-			if(e.getSource().equals(cancelButton)){
-				clock.myMenu.setFontStyle(preFontStyle);
-				clock.myMenu.setFontSize(preFontSize);
-				clock.myMenu.setFontColor(preFontColor);
-				clock.myMenu.setFontKind(preFontKind);
-				clock.myMenu.setBackground(preBgColor);
-			}
-		}
-		
-		public void valueChanged(ListSelectionEvent e) {
-			if(e.getSource().equals(lst1)){
-				this.remove(fontList);
-				this.remove(fontSizeList);
-
-				if(lst1.getSelectedValue().equals("font")){
-					add(1, 0, 1, 1, fontList, gbl, gbc);
-				}
-				else if(lst1.getSelectedValue().equals("font size")){
-					add(1, 0, 1, 1, fontSizeList, gbl, gbc);
-				}
-				else if(lst1.getSelectedValue().equals("font color")){
-					colorChooser = new JColorChooser();
-					Color color = colorChooser.showDialog(this, "Choose color", Color.white);
-				    if(color != null){
-				    	clock.myMenu.setFontColor(color);
-				    }
-				}
-				else if(lst1.getSelectedValue().equals("background color")){
-					colorChooser = new JColorChooser();
-					Color color = colorChooser.showDialog(this, "Choose color", Color.white);
-				    if(color != null){
-				        clock.myMenu.setBackground(color);
-				    }
-				}
-			}
-			
-			if(e.getSource().equals(fontList)){
-				clock.myMenu.setFontStyle((String) fontList.getSelectedValue());
-			}
-			else if(e.getSource().equals(fontSizeList)){
-				clock.myMenu.setFontSize(Integer.parseInt((String) fontSizeList.getSelectedValue()));
-			}
-			setLayout(gbl);
-			setVisible(true);
-		}
-
-		public void stateChanged(ChangeEvent e) {
-		    Color color = colorChooser.getColor();
-		    clock.myMenu.setBackground(color);	
-		}
-	}
 	
 	class MyPanel extends JPanel{
+		JPopupMenu popup;
+		
 		MyTime myTime;
 		Clock clock;
 		
@@ -328,11 +222,73 @@ public class Clock extends JFrame {
 		Color fontColor = Color.BLACK;
 		Color bgColor = Color.WHITE;
 		
+		String[] fs;
+		String[] colorStr = {"black", "white", "red", "green", "blue"};
+		Color[] colors = {Color.BLACK, Color.WHITE, Color.RED, Color.GREEN, Color.BLUE};
+		String[] bgColorStr = {"cyan", "pink", "yellow", "magenta", "orange"};
+		Color[] bgColors = {Color.CYAN, Color.PINK, Color.YELLOW, Color.MAGENTA, Color.ORANGE};
+		int FONT_SIZE_LENGTH = 4;
+		int COLOR_LIST_LENGTH = 5;
+		
+		JEditorPane editor;
+		
 		public MyPanel(Clock clock){
 			myTime = new MyTime();
 			this.clock = clock;
 			font = new Font(fontStyle, fontKind, fontSize);
 			super.setBackground(bgColor);
+			popup = new JPopupMenu();
+			
+			JMenu mn = new JMenu("menu");
+			editor = new JEditorPane();
+			editor.setContentType("text/html");
+			editor.setEditable(true);
+			
+			editor.setText("<b>Hello</b>");
+			mn.add(editor);
+			JMenu mnf = new JMenu("font style");
+			JMenu mnfs = new JMenu("font size");
+			JMenu mnfc = new JMenu("font color");
+			JMenu mnbg = new JMenu("background color");
+			
+			mn.add(mnf);
+			mn.add(mnfs);
+			mn.add(mnfc);
+			mn.add(mnbg);
+			
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			fs = ge.getAvailableFontFamilyNames();
+			JMenuItem[] mif = new JMenuItem[fs.length];
+			for(int i = 0; i < fs.length; i++){
+				mif[i] = new JMenuItem(fs[i]);
+				mnf.add(mif[i]);
+				mif[i].addActionListener(new ActionAdapter(this, this.clock));
+			}
+			
+			JMenuItem[] mifs = new JMenuItem[FONT_SIZE_LENGTH];
+			for(int i = 0; i < FONT_SIZE_LENGTH; i++){
+				mifs[i] = new JMenuItem(Integer.valueOf(10*2*(i+1)).toString());
+				mnfs.add(mifs[i]);
+				mifs[i].addActionListener(new ActionAdapter(this, this.clock));
+			}
+			
+			JMenuItem[] mifc = new JMenuItem[COLOR_LIST_LENGTH];
+			for(int i = 0; i < COLOR_LIST_LENGTH; i++){
+				mifc[i] = new JMenuItem(colorStr[i]);
+				mnfc.add(mifc[i]);
+				mifc[i].addActionListener(new ActionAdapter(this, this.clock));
+			}
+			
+			JMenuItem[] mibg = new JMenuItem[COLOR_LIST_LENGTH];
+			for(int i = 0; i < COLOR_LIST_LENGTH; i++){
+				mibg[i] = new JMenuItem(bgColorStr[i]);
+				mnbg.add(mibg[i]);
+				mibg[i].addActionListener(new ActionAdapter(this, this.clock));
+			}
+			
+			popup.add(mn);
+			add(popup);
+		
 		}
 		
 		public void setDrawPoint(int x, int y){
@@ -392,6 +348,47 @@ public class Clock extends JFrame {
 			g.setColor(fontColor);
 			g.drawString(myTime.time, drawPointX, drawPointY);
 		}
+		
+		class ActionAdapter implements ActionListener{
+			MyPanel panel;
+			Clock clock;
+			public ActionAdapter(MyPanel panel, Clock clock){
+				this.panel = panel;
+				this.clock = clock;
+			}
+			
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("Exit")){
+					System.exit(0);
+				}
+				
+				for(int i = 0; i < fs.length; i ++){
+					if(e.getActionCommand().equals(fs[i]))
+					{
+						setFontStyle(fs[i]);
+					}
+				}
+
+				for(int i = 0; i < FONT_SIZE_LENGTH; i ++){	
+					if(e.getActionCommand().equals(Integer.valueOf(10*2*(i+1)).toString())){
+						setFontSize(10*2*(i+1));
+					}
+				}
+				
+				for(int i = 0; i < COLOR_LIST_LENGTH; i ++){	
+					if(e.getActionCommand().equals(colorStr[i])){
+						setFontColor(colors[i]);
+					}
+				}
+				
+				for(int i = 0; i < COLOR_LIST_LENGTH; i ++){
+					if(e.getActionCommand().equals(bgColorStr[i])){
+						clock.myMenu.setBackground(bgColors[i]);
+					}
+				}
+			}
+		}
+		
 	}
 
 	class Task extends TimerTask {

@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class ResourceManager {
+	//note
+	//Releasing all resources means that the object of Map refs is empty. 
+	//Note that you cannot judge it from the RefernceQueue.
+	
 	//Release all resources in the "finally" block even if this thread is interrupted. 
 	final ReferenceQueue<Object> queue;
 	final Map<Reference<?>, Resource> refs;
@@ -33,6 +37,7 @@ public final class ResourceManager {
 			throw new IllegalStateException();
 		Resource res = new ResourceImpl(key);
 		Reference<?> ref = new PhantomReference<Object>(key, queue);
+		ref.enqueue();//for test
 		refs.put(ref, res);
 		return res;
 	}
@@ -69,38 +74,53 @@ public final class ResourceManager {
 	class ReaperThread extends Thread{
 		Reference<?> ref; 
 		Resource res;
+
 		public void run(){
 			//Run until interrupted.
 			while(true){
 				try{
-					ref = queue.remove();
+					System.out.println("processing");
+					ref = queue.remove();//ref:reference to a key
 					res = null;
 					synchronized(ResourceManager.this){
-						res = refs.get(ref);
+						res = refs.get(ref);//res:an object mapping by the key of "ref"
 						refs.remove(ref);
 					}
-				}catch(InterruptedException ex){
-					break;
+					res.release();
+					ref.clear();
+				}catch(InterruptedException ex){//Only in the case of waiting in the middle of "remove()".
+					ex.printStackTrace();
+					System.out.println("interrupted");
+					//do nothing
 				}
 				finally{
-					while(true){
-						try {
-							ref = queue.remove();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+					if(shutdown){
+						while(true){
+							if(queue.poll() != null){//Without this, this thread may stop in the process of "remove()".
+								try {
+									ref = queue.remove();
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}//ref:reference to a key
+								res = null;
+								synchronized(ResourceManager.this){
+									res = refs.get(ref);//res:an object mapping by the key of "ref"
+									refs.remove(ref);
+								}
+								res.release();
+								ref.clear();
+							}
+							else{
+								System.out.println("break");
+								break;
+							}
 						}
-						res = null;
-						synchronized(ResourceManager.this){
-							res = refs.get(ref);
-							refs.remove(ref);
-						}
-						if(refs.isEmpty()){
-							break;
-						}
+						System.out.println("break");
+						break;
 					}
 				}
 			}
-			
+			System.out.println("end");	
 		}
 	}
 }

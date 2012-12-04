@@ -18,7 +18,7 @@ public class Game {
 	private static int playerIndex = 0;
 	
 	public static void main(String[] args) {
-		String name = "JPL.ch16.ex16_11.BoldPlayer";//class name
+		String name = "ch16.ex16_11.BoldPlayer";//class name
 		Game game = new Game();
 		
 		for(int i = 0; i < 7; i++){

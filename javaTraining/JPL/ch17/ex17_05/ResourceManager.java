@@ -6,9 +6,8 @@ import java.lang.ref.ReferenceQueue;
 import java.util.HashMap;
 import java.util.Map;
 
-//Modified: shutdown(),getResource() 
+//Modified: getResource(), shutDown()
 public final class ResourceManager {
-	//Release all resources in the "finally" block even if this thread is interrupted. 
 	final ReferenceQueue<Object> queue;
 	final Map<Reference<?>, Resource> refs;
 	boolean shutdown = false;
@@ -38,22 +37,39 @@ public final class ResourceManager {
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	public synchronized Resource getResource(Object key){
+	@SuppressWarnings("unchecked")
+	public synchronized Resource getResource(Object key){//How can I get the referent from the key? I'd like to check if the specified referent has been enqueued.
 		if(shutdown)
 			throw new IllegalStateException();
-		Resource res = new ResourceImpl(key);
-		if(res == null){//The key is not available.
-			res.release();
+		
+		boolean keyAvailable = true;
+		
+		while(true){
+			PhantomReference<Object> ref;
+			Resource res = null;
+			if((ref = (PhantomReference<Object>) queue.poll()) != null){
+				res = refs.get(ref);//"ref" is no longer available.
+				refs.remove(ref);
+				if(res != null){
+					keyAvailable = false;
+					res.release();
+				}
+					ref.clear();//Then, "key" referred to by "ref" is retrieved.
+			}
+			else//There is no key to be retrieved.
+				break;
 		}
-		else{//The key is available. 
-			Reference<?> ref = new PhantomReference<Object>(key, queue);//You'll be able to get the object by way of "ref" from the key.
+		if(keyAvailable){
+			Resource res = new ResourceImpl(key);
+			Reference<?> ref = new PhantomReference<Object>(key, queue);//It is possible to get the object by way of "ref" from the key.
 			refs.put(ref, res);
+			return res;
 		}
-		return res;
+		//key is not available
+		return null;
 	}
 	
-	private static class ResourceImpl implements Resource{
+	static class ResourceImpl implements Resource{
 		
 		int keyHash;
 		boolean needsRelease = false;

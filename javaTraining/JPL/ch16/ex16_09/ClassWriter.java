@@ -10,7 +10,7 @@ public class ClassWriter {
 	
 	public static void main(String[] args) {
 		ClassWriter cw = new ClassWriter();
-		Class<?> cls = cw.getClass("JPL.ch16.ex16_09.Something$Node");
+		Class<?> cls = cw.getClass("java.util.HashMap");
 		cw.printClass(cls);
 		System.out.println("{");
 		cw.printFields(cls);

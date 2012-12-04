@@ -23,6 +23,8 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JWindow;
+
 import gui01_03.MyFrame.MyMenuBar.ActionAdapter;
 
 public class Clock extends Window{

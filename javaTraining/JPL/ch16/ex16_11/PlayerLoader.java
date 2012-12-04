@@ -35,4 +35,6 @@ public class PlayerLoader extends ClassLoader{
 //		}
 //		return null;
 //	}
+	//ロードするクラスは親のローダーが見つけられない別のパスに置く。p384 そうしないと2でロードする。3に達しないと、自分のクラスローダー
+	//findclassは呼ばれない。
 }
