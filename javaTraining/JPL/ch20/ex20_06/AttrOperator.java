@@ -8,6 +8,8 @@ import java.io.StreamTokenizer;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//It is better to show an error message if the file does not contain any symbol of "=".
 public class AttrOperator {
 	
 	private Map<String, Double> attrs;
@@ -44,7 +46,7 @@ public class AttrOperator {
 						attrs.put(key, attrs.get(key) + in.nval);
 					}
 					else{
-						attrs.put(key, 0 + in.nval);
+						attrs.put(key, 0 + in.nval);//Explain that "0" is the default value.
 					}
 				}
 				else if(c == '-'){

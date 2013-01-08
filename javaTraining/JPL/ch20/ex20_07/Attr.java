@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PushbackInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,6 +24,12 @@ public class Attr {
 		this.name = name;
 		this.value = value;
 	}
+	
+	//argument : DataInputStream in
+	//if(type instanceOf String)
+	//readUTF();
+	//else if(type type instanceOf Long)
+	//readLong();…
 	
 	public Attr(InputStream is) throws IOException, ClassNotFoundException{
 		ObjectInputStream in = new ObjectInputStream(is);

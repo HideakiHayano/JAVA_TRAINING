@@ -15,7 +15,7 @@ public class FileFilterBySuffix implements FilenameFilter{
 	}
 	
 	/**
-	 * Show all file names including the suffix which exist under the directory. 
+	 * Show all file names including the suffix which exists under the directory. 
 	 * @param dir
 	 * @param suffix
 	 */

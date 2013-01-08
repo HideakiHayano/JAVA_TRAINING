@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 //Modified: getResource(), shutDown()
+//A bit wrong.
+
 public final class ResourceManager {
 	final ReferenceQueue<Object> queue;
 	final Map<Reference<?>, Resource> refs;
@@ -32,7 +34,7 @@ public final class ResourceManager {
 				res.release();
 				ref.clear();
 			}
-			else//No objects in the queue.
+			else//No objects in the queue.//2012/12 Wrong. The condition to end this roop is that refs is empty. Queue need not to be checked.
 				break;
 		}
 	}

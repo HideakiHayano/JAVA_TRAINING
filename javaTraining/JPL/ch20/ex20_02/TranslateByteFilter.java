@@ -26,7 +26,7 @@ public class TranslateByteFilter extends FilterReader{
 		TranslateByteFilter tl = new TranslateByteFilter(src);
 		int c;
 		//Convert 'a' to 'e'.
-		while((c = tl.read((byte)'a', (byte)'e')) != -1){
+		while((c = tl.read((byte)'a', (byte)'e')) != -1){//tl.read() returns the value between 0 and 255.
 			System.out.println((char)c);
 		}
 	}

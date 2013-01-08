@@ -11,6 +11,8 @@ public final class ResourceManager {
 	//Releasing all resources means that the object of Map refs is empty. 
 	//Note that you cannot judge it from the RefernceQueue.
 	
+	//2012/12 All sets of key and value must be released when shutdown is called.. 
+	
 	//Release all resources in the "finally" block even if this thread is interrupted. 
 	final ReferenceQueue<Object> queue;
 	final Map<Reference<?>, Resource> refs;
@@ -74,7 +76,16 @@ public final class ResourceManager {
 	class ReaperThread extends Thread{
 		Reference<?> ref; 
 		Resource res;
-
+		
+		//answer
+		//in catch section
+		//synchronized(ResourceManager.this){//refs is not thread safe.
+		//if(shutDown && refs.size() == 0){
+		// Runtime.getRuntime().gc();
+		//return;
+		//}
+		//}
+		
 		public void run(){
 			//Run until interrupted.
 			while(true){
@@ -110,7 +121,7 @@ public final class ResourceManager {
 								res.release();
 								ref.clear();
 							}
-							else{
+							else{//Wrong. Check if the size of ref is equal to 0. Whether queue is null is not a condition to terminate the system.
 								System.out.println("break");
 								break;
 							}
